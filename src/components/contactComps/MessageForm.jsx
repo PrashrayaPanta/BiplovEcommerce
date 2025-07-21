@@ -1,8 +1,16 @@
-import React from 'react';
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import emailjs from "@emailjs/browser";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -19,14 +27,34 @@ export default function MessageForm() {
     resolver: zodResolver(messageSchema),
   });
 
-  const onSubmit = (data) => {
-    console.log("Message Data:", data);
-    // Handle form submission logic here (e.g., send email or save message)
+  const onSubmit = async (data) => {
+    try {
+      const result = await emailjs.send(
+        "service_p2rp2he", // Replace with your EmailJS service ID
+        "template_m4u53ph", // Replace with your EmailJS template ID
+        {
+          name: data.name,
+          email: data.email,
+          subject: data.subject,
+          message: data.message,
+        },
+        "3_gA9XGD3TJWzyzjy" // Replace with your EmailJS user/public key
+      );
+      console.log("Email sent successfully:", result.text);
+      alert("Message sent successfully!");
+      form.reset()
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      alert("Failed to send message. Please try again later.");
+    }
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-lg mx-auto p-6 border-2 rounded-lg shadow-md">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6 max-w-lg mx-auto p-6 border-2 rounded-lg shadow-md"
+      >
         {/* Name Field */}
         <FormField
           control={form.control}

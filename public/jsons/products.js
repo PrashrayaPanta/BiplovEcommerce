@@ -1,7 +1,9 @@
+import { categories } from "./categories";
+
 export const products = [
   {
     name: 'Portable Double Garment Rack – Metal Wardrobe Closet System',
-    image: 'https://hawastore.shop/wp-content/uploads/2024/07/Rack-Main-600x600.png',
+    image: ['https://hawastore.shop/wp-content/uploads/2024/07/Rack-Main-600x600.png'],
     price: 3500,
     fakePrice: 3850,
     createdAt: '2024-10-01',
@@ -17,7 +19,7 @@ export const products = [
   },
   {
     name: 'Transparent RGB Wireless Gaming Controller',
-    image: 'https://hawastore.shop/wp-content/uploads/2024/06/TransparentGamepad-Cover-600x600.png',
+    image: ['https://hawastore.shop/wp-content/uploads/2024/06/TransparentGamepad-Cover-600x600.png'],
     price: 4500,
     fakePrice: 4950,
     createdAt: '2024-09-25',
@@ -34,7 +36,7 @@ export const products = [
   },
   {
     name: 'UV Protection Portable Folding Automatic Umbrella',
-    image: 'https://hawastore.shop/wp-content/uploads/2024/06/UVUmbrella-Main-600x600.png',
+    image: ['https://hawastore.shop/wp-content/uploads/2024/06/UVUmbrella-Main-600x600.png'],
     price: 800,
     createdAt: '2024-10-02',
     updatedAt: '2024-10-03',
@@ -50,7 +52,7 @@ export const products = [
   },
   {
     name: 'UV Protection Portable Mini Compact Umbrella',
-    image: 'https://hawastore.shop/wp-content/uploads/2024/06/PortableMiniFoldingUmbrella-Main-600x600.png',
+    image: ['https://hawastore.shop/wp-content/uploads/2024/06/PortableMiniFoldingUmbrella-Main-600x600.png'],
     price: 800,
     fakePrice: 1000,
     createdAt: '2024-09-29',
@@ -67,7 +69,7 @@ export const products = [
   },
   {
     name: 'Ergonomic Office Chair',
-    image: 'https://via.placeholder.com/600x600.png?text=Product+Image',
+    image: ['https://via.placeholder.com/600x600.png?text=Product+Image'],
     price: 7500,
     createdAt: '2024-09-15',
     updatedAt: '2024-09-16',
@@ -82,7 +84,7 @@ export const products = [
   },
   {
     name: 'Bluetooth Noise Cancelling Headphones',
-    image: 'https://via.placeholder.com/600x600.png?text=Product+Image',
+    image: ['https://via.placeholder.com/600x600.png?text=Product+Image'],
     price: 5000,
     fakePrice: 5500,
     createdAt: '2024-09-22',
@@ -99,7 +101,7 @@ export const products = [
   },
   {
     name: 'Stainless Steel Water Bottle',
-    image: 'https://via.placeholder.com/600x600.png?text=Product+Image',
+    image: ['https://via.placeholder.com/600x600.png?text=Product+Image'],
     price: 1200,
     createdAt: '2024-09-18',
     updatedAt: '2024-09-20',
@@ -115,7 +117,7 @@ export const products = [
   },
   {
     name: 'Smart Fitness Tracker',
-    image: 'https://via.placeholder.com/600x600.png?text=Product+Image',
+    image: ['https://via.placeholder.com/600x600.png?text=Product+Image'],
     price: 3000,
     fakePrice: 3300,
     createdAt: '2024-10-04',
@@ -130,4 +132,62 @@ export const products = [
       <p>Stay fit, motivated, and connected with the Smart Fitness Tracker, the perfect companion for your fitness journey!</p>
     `,
   },
+  {
+    name: "Transparent Wireless Bluetooth Mouse, Triple Mode (BT5.1+ BT5.1+ 2.4GHz) Type C Rechargeable Silent Click Mouse",
+    image:["https://hawastore.shop/wp-content/uploads/2024/06/He9f857dafd114702b5d2d32f2fb69b8e0.jpg", "https://placehold.co/400","https://hawastore.shop/wp-content/uploads/2024/06/He9f857dafd114702b5d2d32f2fb69b8e0.jpg", "https://placehold.co/400","https://hawastore.shop/wp-content/uploads/2024/06/He9f857dafd114702b5d2d32f2fb69b8e0.jpg", "https://placehold.co/400",],
+    price: 1400,
+    fakePrice: 2500,
+    createdAt: '2024-12-04',
+    updatedAt: '2024-12-05',
+    sales: 10,
+    categories: ["computer-accessories", "gaming"],
+    slug:"transparent-wireless-mouse",
+    description: `<ul style="list-style-type: disc; margin-left: 10px; padding-left: 1  0px; line-height: 1.6; color: inherit; display: flex; flex-direction: column; gap: 0.25rem;">
+  <li>Rechargeable mouse for Windows, Mac, iPad, and Android.</li>
+  <li>Full transparent and sleek design with silent buttons.</li>
+  <li>Tri Mode Connection: BT5.1 + BT5.1 and USB 2.4GHz.</li>
+  <li>Allows connection to up to 3 devices: 2 via Bluetooth and 1 via wireless dongle.</li>
+  <li>Switch smoothly between connected devices using the switch button located on the bottom of the mouse.</li>
+  <li>DPI button with switchable settings: 800-1200-1600-2400.</li>
+  <li>Desktop button for one-click access to the computer desktop.</li>
+  <li>Magnetically closing top cover provides access to the dongle.</li>
+  <li>Net weight: 76g.</li>
+  <li>Size: 113 x 57 x 25mm.</li>
+  <li>Rechargeable built-in 400mAh Lithium Battery.</li>
+  <li>Type C charging port.</li>
+  <li>Mouse can be charged with the included Type C charging cable.</li>
+  <li>Battery indicator light shows the current battery level and flashes during charging or when the battery is low.</li>
+  <li>Automatic sleep mode after 5 minutes of inactivity to save power.</li>
+  <li>Available colors: Orange, White, Blue, and Grey.</li>
+</ul>
+
+`,
+details:{
+  tripleModeConnection: "This wireless transparent mouse boasts an advanced Bluetooth 5.1 chip, ensuring a stable and low-latency connection. It also supports a reliable 2.4GHz wireless connection with plug-and-play convenience—no drivers needed. Switch effortlessly between up to three connected devices by touching the switch on the back.",
+  builtInBattery: "The transparent mouse features a built-in high-performance rechargeable 400 mAh battery, providing an impressive 30 days of usage on a full charge. The automatic hibernation mode minimizes power consumption, effortlessly awakening with a simple button click.",
+  batteryLevelDisplay: "The Real Time 4 grid power display allows you to effortlessly monitor the battery levels during use.",
+  ultraSilentClick: "Effortlessly work in shared spaces like open offices, libraries, or crowded trains without causing disruptions. Enjoy the familiar click and scroll wheel feel with approximately 90% less noise.",
+  metalScrollWheel: "The robust anti-slip metal scroll wheel adds texture and prevents slipping while scrolling, ensuring a secure grip for your hands.",
+  desktopKey: "Effortlessly switch to the desktop with a single click using the 'Desktop Key,' enhancing office efficiency and ensuring privacy. (Desktop key doesn’t work with Mac OS)",
+  adjustableDPI: "Experience precise and swift tracking with our optical gaming mouse, featuring 4 adjustable DPI levels (800/1200/1600/2400). Suitable for all mouse mats, it ensures high sensitivity and accuracy for both office and gaming use.",
+  ergonomicDesign: "This ultra-light mouse is designed to seamlessly fit the palm of your hand, ensuring a comfortable and effortless feel.",
+  chargingTime: "2 Hours 30 minutes for a full charge.",
+  standbyTime: "Lasts up to 30 days on a full charge.",
+  productMaterial: "Transparent PC+ABS material (outer shell). The wireless mouse features a detachable magnetic transparent cover that can be detached or attached in a second.",
+  weight: "76 Grams",
+  workingMode: "2.4G+BT1+BT2",
+  batteryCapacity: "400 mAh",
+  sensorTechnology: "Optical",
+  dpiResolution: "800-1200-1600-2400",
+  dpiLightMode: "RED(800), GREEN(1200), BLUE(1600), PURPLE(2400)",
+  lightMode: "Colorful Breathing Light effect",
+  warranty: "None",
+  chargingCable: "USB – C",
+  mouseSize: "LxWxH: 113*57*25 (mm)",
+  operatingSystem: "Compatible with Windows 8/10/11, Mac OS, iOS 13 and above, Android",
+  connectivity: "Bluetooth, Wi-Fi, wired, USB",
+  platform: "PC, Laptop, MacBook, iPad, Android phone and tablet.",
+  includedItems: "1 Wireless Mouse, Type-C charging cable and USB Receiver"
+}
+},
 ];

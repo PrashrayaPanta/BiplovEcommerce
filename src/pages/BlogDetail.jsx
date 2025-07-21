@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { blogData } from '../../public/jsons/blogs'; // Assuming this is the file where your blog data is stored
-import "/css/blogstyle.css?url"
 
 function BlogDetail() {
   const { slug } = useParams();

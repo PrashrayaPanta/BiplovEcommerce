@@ -56,7 +56,7 @@ export default function CartPage() {
             </label>
           </div>
         </div>
-        <button className="w-full mt-6 bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition">
+        <button className="w-full mt-6 bg-[#3c07ff] text-white py-3 rounded-md hover:bg-[#444444] transition">
           Proceed to Checkout
         </button>
       </div>

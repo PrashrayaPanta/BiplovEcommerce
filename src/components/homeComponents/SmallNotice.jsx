@@ -29,6 +29,7 @@ function SmallNotice() {
             <img 
               src={notice.image} 
               alt={notice.title} 
+            loading='lazy'
               className="w-20 h-auto mb-4"
             />
             <h3 className="font-semibold text-xl mb-2">{notice.title}</h3>
