@@ -6,7 +6,7 @@ import SearchButton from './SearchButton';
 function MobileFooter() {
   const navigate = useNavigate()
   return (
-    <div className="sticky bottom-0 left-0 w-full bg-white border-t border-gray-200 z-50 md:hidden">
+    <div className="sticky bottom-0 left-0 w-full border-t border-gray-200 z-50 md:hidden bg-red-500">
       <div className="container mx-auto flex justify-around py-2">
         
         {/* Shop Button */}

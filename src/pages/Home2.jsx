@@ -12,7 +12,7 @@ import "../App.css"
 
 export default function Home2() {
   return (
-    <div className='bg-gray-100 flex flex-col gap-y-16'>
+    <div className='bg-red-500 flex flex-col gap-y-16'>
         <HeroSection />
         <div className='bg-gray-100 flex flex-col gap-y-16 mx-2 md:mx-8'>
         <HomeCategoryBox />
