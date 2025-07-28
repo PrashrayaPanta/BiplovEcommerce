@@ -21,7 +21,14 @@ import {
 } from "./ui/sheet";
 import CartSheet from "./cartComponents/CartSheet";
 import SearchDialog from "./SearchButton";
-import { ClerkLoaded, ClerkLoading, SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 export function capitalizeWords(str) {
   return str
@@ -72,86 +79,99 @@ function MobileHeader() {
 
         {/* Slide-in Mobile Menu */}
         <SheetContent side="left" className="bg-white h-full">
-  <SheetHeader>
-    <SheetTitle>
-      <div className="pb-4 text-xl font-semibold">Menu</div>
-      <hr className="border-gray-300" />
-    </SheetTitle>
+          <SheetHeader>
+            <SheetTitle>
+              <div className="pb-4 text-xl font-semibold">Menu</div>
+              <hr className="border-gray-300" />
+            </SheetTitle>
 
-    {/* Search input section */}
-    <div className="w-full text-left mt-4">
-      <div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
-        <div className="grid place-items-center h-full w-12 text-gray-300">
-          <SearchIcon className="w-6 h-6" />
-        </div>
-        <form onSubmit={handleSubmit} className="w-full">
-          <input
-            className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Search something..."
-          />
-        </form>
-      </div>
-    </div>
+            {/* Search input section */}
+            <div className="w-full text-left mt-4">
+              <div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+                <div className="grid place-items-center h-full w-12 text-gray-300">
+                  <SearchIcon className="w-6 h-6" />
+                </div>
+                <form onSubmit={handleSubmit} className="w-full">
+                  <input
+                    className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Search something..."
+                  />
+                </form>
+              </div>
+            </div>
 
-    {/* Menu Links */}
-    <div className="text-left flex flex-col gap-6 items-start mt-8">
-      <button
-        onClick={() => handleLinkClick("/categories")}
-        className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
-      >
-        Shop
-      </button>
-      <button
-        onClick={() => handleLinkClick("/categories")}
-        className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
-      >
-        Product Categories
-      </button>
-      <button
-        onClick={() => handleLinkClick("/blogs")}
-        className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
-      >
-        Blog
-      </button>
-      <button
-        onClick={() => handleLinkClick("/wishlist")}
-        className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
-      >
-        Wishlist
-      </button>
-      <button
-        onClick={() => handleLinkClick("/contact")}
-        className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
-      >
-        Contact
-      </button>
-    </div>
-  </SheetHeader>
+            {/* Menu Links */}
+            <div className="text-left flex flex-col gap-6 items-start mt-8">
+              <button
+                onClick={() => handleLinkClick("/categories")}
+                className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+                Shop
+              </button>
+              <button
+                onClick={() => handleLinkClick("/categories")}
+                className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+                Product Categories
+              </button>
+              <button
+                onClick={() => handleLinkClick("/blogs")}
+                className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+                Blog
+              </button>
+              <button
+                onClick={() => handleLinkClick("/wishlist")}
+                className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+                Wishlist
+              </button>
+              <button
+                onClick={() => handleLinkClick("/contact")}
+                className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+                Contact
+              </button>
 
-  {/* Footer */}
-  <div className="absolute bottom-4 left-4">
-    <ClerkLoading>
-      <Loader className="animate-spin w-6 h-6 text-gray-500" />
-    </ClerkLoading>
-    <ClerkLoaded>
-      <SignedOut>
-        <SignInButton>
-          <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-[#3c07ff] transition">
-            <User className="w-5 h-5" />
-            Sign In
-          </button>
-        </SignInButton>
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-    </ClerkLoaded>
-  </div>
-</SheetContent>
+              <button
+                onClick={() => handleLinkClick("/register")}
+                className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+                Register
+              </button>
 
+              <button
+                onClick={() => handleLinkClick("/register")}
+                className="block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+                Register
+              </button>
+            </div>
+          </SheetHeader>
+
+          {/* Footer */}
+          <div className="absolute bottom-4 left-4">
+            <ClerkLoading>
+              <Loader className="animate-spin w-6 h-6 text-gray-500" />
+            </ClerkLoading>
+            <ClerkLoaded>
+              <SignedOut>
+                <SignInButton>
+                  <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-[#3c07ff] transition">
+                    <User className="w-5 h-5" />
+                    Sign In
+                  </button>
+                </SignInButton>
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </ClerkLoaded>
+          </div>
+        </SheetContent>
       </Sheet>
 
       {/* Logo */}

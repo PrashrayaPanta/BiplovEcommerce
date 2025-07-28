@@ -104,6 +104,28 @@ export const Navbar = () => {
         </li>
         <li>
           <Link
+            to="/register"
+            className="hover:text-gray-500"
+            style={{ cursor: "pointer" }}
+          >
+            Register
+          </Link>
+        </li>
+
+
+
+        <li>
+          <Link
+            to="/login"
+            className="hover:text-gray-500"
+            style={{ cursor: "pointer" }}
+          >
+            Login
+          </Link>
+        </li>
+
+        <li>
+          <Link
             to="/contact"
             className="hover:text-gray-500"
             style={{ cursor: "pointer" }}
@@ -111,8 +133,12 @@ export const Navbar = () => {
             Contact
           </Link>
         </li>
+
         <SearchDialog />
+
       </ul>
+
+      {/* {Mobile} */}
       <Sheet open={isOpen} onOpenChange={setIsOpen} className="h-full">
         <SheetTrigger asChild >
           <Menu  style={{ cursor: 'pointer' }} className="flex lg:hidden cursor-pointeer text-gray-700 hover:text-gray-900 transition duration-200" />
@@ -176,6 +202,20 @@ export const Navbar = () => {
                 className="hover:bg-gray-200 w-full text-left py-2 px-3 rounded-xl block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
               >
                 Contact
+              </button>
+
+              <button
+                onClick={() => handleLinkClick("/register")}
+                className="hover:bg-gray-200 w-full text-left py-2 px-3 rounded-xl block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+                Register
+              </button>
+
+              <button
+                onClick={() => handleLinkClick("/login")}
+                className="hover:bg-gray-200 w-full text-left py-2 px-3 rounded-xl block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+                Login
               </button>
             </div>
           </SheetHeader>

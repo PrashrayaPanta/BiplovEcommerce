@@ -40,7 +40,7 @@ export default function ProductBox({ product }) {
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="p-4 flex flex-col justify-between h-40 bg-blue-500">
+          <div className="p-4 flex flex-col justify-between min-h-36 bg-blue-500">
         
               <h3 className="text-sm font-semibold text-gray-800">
                 <a href={product.href}>{product.name}</a>
