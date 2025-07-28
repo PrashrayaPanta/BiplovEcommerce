@@ -1,6 +1,6 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
 export default function ProductBox({ product }) {
   const navigate = useNavigate();
@@ -13,13 +13,19 @@ export default function ProductBox({ product }) {
 
   // Calculate discount percentage
   const discount = product.fakePrice
-    ? Math.round(((product.fakePrice - product.price) / product.fakePrice) * 100)
+    ? Math.round(
+        ((product.fakePrice - product.price) / product.fakePrice) * 100
+      )
     : 0;
 
   return (
-    <div ref={ref}> {/* Attach ref to the outer div */}
+    <div ref={ref}>
+      {/* Attach ref to the outer div */}
       {inView && (
-        <div key={product.id} className="group relative rounded-lg transition-transform transform hover:scale-105">
+        <div
+          key={product.id}
+          className="group relative rounded-lg transition-transform transform hover:scale-105"
+        >
           <div className="aspect-square w-full bg-gray-200 relative">
             {/* Display discount badge */}
             {product.fakePrice && discount > 0 && (
@@ -34,28 +40,28 @@ export default function ProductBox({ product }) {
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="p-4 flex flex-col justify-between h-32">
-            <div>
+          <div className="p-4 flex flex-col justify-between h-40 bg-blue-500">
+        
               <h3 className="text-sm font-semibold text-gray-800">
-                <a href={product.href}>
-                  <span aria-hidden="true" className="absolute inset-0" />
-                  {product.name}
-                </a>
+                <a href={product.href}>{product.name}</a>
               </h3>
-              <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+              {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
+            {/* </div> */}
+            <div>
+              <p className="text-md bg-blue-400 items-center flex gap-2 justify-center flex-wrap">
+                {product.fakePrice ? (
+                  <span className="line-through">Rs. {product.fakePrice}</span>
+                ) : (
+                  ""
+                )}
+                Rs. {product.price}
+              </p>
             </div>
-            <p className="text-md text-gray-500 items-center flex gap-2 justify-center">
-              {product.fakePrice ? (
-                <span className="line-through">Rs. {product.fakePrice}</span>
-              ) : ""} 
-              Rs. {product.price}
-            </p>
           </div>
         </div>
       )}
-
       {inView && (
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-4 mt-20">
           <button
             onClick={() => {
               navigate(`/product/${product.slug}`);

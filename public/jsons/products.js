@@ -2,7 +2,7 @@ import { categories } from "./categories";
 
 export const products = [
   {
-    name: 'Portable Double Garment Rack – Metal Wardrobe Closet System',
+    name: 'Portable Double Garment Rack – Metal Wardrobe Closet System dfhgiuhdskjfhsdjka sdiuhfiusahdiufh',
     image: ['https://hawastore.shop/wp-content/uploads/2024/07/Rack-Main-600x600.png'],
     price: 3500,
     fakePrice: 3850,

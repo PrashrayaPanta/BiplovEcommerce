@@ -10,7 +10,7 @@ const newestProducts = products
 
 function NewArrivals() {
   return (
-    <div className="container mx-auto py-12">
+    <div className="container mx-auto py-12 bg-red-500 p-2">
       <h2 className="text-3xl font-semibold text-center mb-8">New Arrivals</h2>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {newestProducts.map((product, index) => (

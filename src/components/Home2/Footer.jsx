@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="py-10 mt-16 mx-4">
       <div className="max-w-6xl mx-auto flex gap-8 justify-between flex-wrap">
         {/* Logo & Social Media */}
-        <div className="bg-slate-100">
+        <div className="">
           <img
             src="https://placehold.co/400"
             alt="Hawa Store Logo"
@@ -22,9 +22,9 @@ const Footer = () => {
 
 
         {/* Shop and Company */}
-        <div className="flex flex-row gap-28">
+        <div className="flex flex-row gap-28  flex-grow sm:flex-grow-0">
           {/* Shop */}
-          <div>
+          <div className="  text-center flex-grow">
             <h3 className="font-bold text-gray-800">SHOP</h3>
             <ul className="mt-2 space-y-2 text-gray-600">
               <li>
@@ -63,7 +63,7 @@ const Footer = () => {
         </div>
 
         {/* Newsletter */}
-        <div className="text-center  mx-auto md:mx-0">
+        <div className="text-center  mx-auto lg:mx-0">
           <h3 className="font-bold text-gray-800">STAY UP TO DATE</h3>
           <div className="flex mt-2">
             <input

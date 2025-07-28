@@ -24,7 +24,7 @@ function CategorySidebar() {
   const categoryCounts = countProductsByCategory();
 
   return (
-    <div className="w-[40rem] bg-white shadow-md rounded-md p-4">
+    <div className="shadow-md rounded-md p-4 bg-red-500">
       <h2 className="text-lg font-semibold mb-4">Categories</h2>
       <ul className="space-y-2">
         {categories.map((category) => (

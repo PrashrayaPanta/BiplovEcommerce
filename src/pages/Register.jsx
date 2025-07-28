@@ -39,7 +39,7 @@ export default function Register() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-[30rem] mx-auto p-6 border-2 rounded-lg my-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-[30rem] mx-auto p-6 border-2 rounded-lg   bg-pink-400 mt-20">
       <h1 className="text-2xl font-bold text-center">Register</h1>
         <FormField
           control={form.control}

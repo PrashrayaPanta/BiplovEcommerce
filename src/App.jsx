@@ -39,9 +39,9 @@ function App() {
       <Navbar/>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Home2 />} />
-          <Route path="/home2" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/home2" element={<Home />} /> */}
+          {/* <Route path="/shop" element={<Shop />} /> */}
           <Route path="/categories" element={<Categories />} />
           <Route path="/product/:slug" element={<ProductDescription />} />
           <Route path="/blogs" element={<Blog />} />
