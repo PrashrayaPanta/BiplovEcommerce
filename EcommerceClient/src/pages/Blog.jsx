@@ -4,7 +4,7 @@ import { blogData } from '../../public/jsons/blogs';
 import WriteBlog from '@/components/blogComponents/WriteBlog';
 
 
-function BlogPage() {
+export function Blog() {
   return (
     <div className="container mx-auto py-8 mt-20">
       {/* <WriteBlog /> */}
@@ -25,4 +25,4 @@ function BlogPage() {
   );
 }
 
-export default BlogPage;
+

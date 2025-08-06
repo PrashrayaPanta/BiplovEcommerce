@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { categories } from '../../../public/jsons/categories';
 import { products } from '../../../public/jsons/products';
 import { Link } from 'react-router-dom';
@@ -23,8 +23,9 @@ function countProductsByCategory() {
 function CategorySidebar() {
   const categoryCounts = countProductsByCategory();
 
+
   return (
-    <div className="shadow-md rounded-md p-4 bg-red-500">
+    <div className="shadow-md rounded-md p-4">
       <h2 className="text-lg font-semibold mb-4">Categories</h2>
       <ul className="space-y-2">
         {categories.map((category) => (

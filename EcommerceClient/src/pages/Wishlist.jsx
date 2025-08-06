@@ -2,7 +2,7 @@ import WishProductBox from '@/components/wishlist/WishProductBox';
 import { products } from '../../public/jsons/products';
 import React from 'react'
 
-function WishlistPage() {
+export function Wishlist() {
   // Taking the first two products from the array
   const wishlistProducts = products.slice(0, 2);
 
@@ -23,4 +23,3 @@ function WishlistPage() {
   );
 }
 
-export default WishlistPage;

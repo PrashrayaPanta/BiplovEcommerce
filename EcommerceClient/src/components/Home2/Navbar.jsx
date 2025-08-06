@@ -104,19 +104,17 @@ export const Navbar = () => {
         </li>
         <li>
           <Link
-            to="/register"
+            to="/contact"
             className="hover:text-gray-500"
             style={{ cursor: "pointer" }}
           >
-            Register
+            Contact
           </Link>
         </li>
 
-
-
         <li>
           <Link
-            to="/login"
+            to="/Login"
             className="hover:text-gray-500"
             style={{ cursor: "pointer" }}
           >
@@ -126,19 +124,40 @@ export const Navbar = () => {
 
         <li>
           <Link
-            to="/contact"
+            to="/register"
             className="hover:text-gray-500"
             style={{ cursor: "pointer" }}
           >
-            Contact
+           Register
           </Link>
         </li>
 
+
+        <li>
+          <Link
+            to="/productEntry"
+            className="hover:text-gray-500"
+            style={{ cursor: "pointer" }}
+          >
+           Product Entry Form
+          </Link>
+        </li>
+
+
+
+        <li>
+          <Link
+            to="/writeBlog"
+            className="hover:text-gray-500"
+            style={{ cursor: "pointer" }}
+          >
+           Write Blogs
+          </Link>
+
+
+        </li>
         <SearchDialog />
-
       </ul>
-
-      {/* {Mobile} */}
       <Sheet open={isOpen} onOpenChange={setIsOpen} className="h-full">
         <SheetTrigger asChild >
           <Menu  style={{ cursor: 'pointer' }} className="flex lg:hidden cursor-pointeer text-gray-700 hover:text-gray-900 transition duration-200" />
@@ -208,14 +227,29 @@ export const Navbar = () => {
                 onClick={() => handleLinkClick("/register")}
                 className="hover:bg-gray-200 w-full text-left py-2 px-3 rounded-xl block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
               >
-                Register
+              Register
               </button>
+
 
               <button
                 onClick={() => handleLinkClick("/login")}
                 className="hover:bg-gray-200 w-full text-left py-2 px-3 rounded-xl block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
               >
-                Login
+                  Login
+              </button>
+
+              <button
+                onClick={() => handleLinkClick("/productEntry")}
+                className="hover:bg-gray-200 w-full text-left py-2 px-3 rounded-xl block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+                Product Entry Form
+              </button>
+
+              <button
+                onClick={() => handleLinkClick("/writeBlog")}
+                className="hover:bg-gray-200 w-full text-left py-2 px-3 rounded-xl block text-gray-800 text-lg hover:text-orange-500 transition-colors duration-200"
+              >
+               Write Blogs
               </button>
             </div>
           </SheetHeader>
@@ -258,12 +292,12 @@ export const HeroSection = () => {
   );
 };
 
-const Header = () => {
-  return (
-    <div className="relative">
-      <HeroSection />
-    </div>
-  );
-};
+// const Header = () => {
+//   return (
+//     <div className="relative">
+//       <HeroSection />
+//     </div>
+//   );
+// };
 
-export default Header;
+// export default Header;

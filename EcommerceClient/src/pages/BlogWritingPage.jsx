@@ -19,7 +19,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import TinyMCEEditor from "@/components/blogComponents/TinyMCEEditor";
 
-const BlogWritingPage = () => {
+export const BlogWritingPage = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [tags, setTags] = useState("");
@@ -32,7 +32,7 @@ const BlogWritingPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mt-20">
       <Card className="w-full">
         <CardHeader>
           <CardTitle>Write a New Blog Post</CardTitle>

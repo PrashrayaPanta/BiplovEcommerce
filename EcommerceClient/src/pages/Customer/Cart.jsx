@@ -5,7 +5,7 @@ import { cartItems as initialCartItems } from '../../public/jsons/cartItems';
 import CartItem from '@/components/cartComponents/CartItem';
 
 
-export default function CartPage() {
+export  function Cart() {
   const [cartItems, setCartItems] = useState(initialCartItems);
 
   const updateQuantity = (id, newQuantity) => {

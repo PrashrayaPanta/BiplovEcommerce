@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,35 +12,35 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
-import { Link } from "react-router-dom"; // Import Link for navigation
-
-const loginSchema = z.object({
+export const registerSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
+  }),
+  email: z.string().email({
+    message: "Invalid email address.",
   }),
   password: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }),
 });
 
-export default function Login() {
+export function Register() {
   const form = useForm({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
   });
 
   const onSubmit = (data) => {
-    console.log("Login Data:", data);
-    // Handle login logic here (e.g., API call)
+    console.log("Register Data:", data);
+    // Handle registration logic here (e.g., API call)
   };
 
   return (
     <Form {...form}>
-
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-[30rem] mx-auto p-6 border-2 rounded-lg my-4 mt-20 bg-red-500">
-      <h1 className="text-2xl font-bold text-center">Login</h1>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-[30rem] mx-auto p-6 border-2 rounded-lg   bg-pink-400 mt-20">
+      <h1 className="text-2xl font-bold text-center">Register</h1>
         <FormField
           control={form.control}
           name="username"
@@ -48,6 +49,20 @@ export default function Login() {
               <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input placeholder="Username" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input type="email" placeholder="Email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -68,12 +83,11 @@ export default function Login() {
           )}
         />
 
-        <Button type="submit" className="mx-auto w-full">Login</Button>
-
-        {/* Registration Prompt */}
+        <Button type="submit" className="text-center w-full">Register</Button>
+        {/* Login Prompt */}
         <p className="mt-4 text-center text-gray-600">
-          Don't have an account? 
-          <Link to="/register" className="text-blue-600 hover:underline ml-1">Register</Link>
+          Already have an account? 
+          <Link to="/login" className="text-blue-600 hover:underline ml-1">Login</Link>
         </p>
       </form>
     </Form>

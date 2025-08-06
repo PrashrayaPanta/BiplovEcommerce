@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { blogData } from '../../public/jsons/blogs'; // Assuming this is the file where your blog data is stored
 
-function BlogDetail() {
+export function BlogDetail() {
   const { slug } = useParams();
 
   // Find the blog post with the matching slug

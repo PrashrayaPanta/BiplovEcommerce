@@ -9,7 +9,7 @@ import { X } from 'lucide-react';
 import TinyMCEEditor from '@/components/blogComponents/TinyMCEEditor';
 import { categories } from '../../public/jsons/categories';
 
-const ProductEntryForm = () => {
+export const ProductEntryForm = () => {
   const [product, setProduct] = useState({
     name: '',
     image: [],
@@ -68,7 +68,7 @@ const ProductEntryForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-8 mt-24">
       <Card>
         <CardHeader>
           <CardTitle>Product Information</CardTitle>
@@ -162,4 +162,3 @@ const ProductEntryForm = () => {
   );
 };
 
-export default ProductEntryForm;
