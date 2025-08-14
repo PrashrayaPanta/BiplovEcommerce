@@ -1,6 +1,6 @@
-import React from 'react';
-import CategorySidebar from '../components/categoryComponents/CategorySidebar'; // Adjust the import path as needed
-import ProductSection from '../components/categoryComponents/ProductSection'; // Adjust the import path as needed
+
+import CategorySidebar from '../../components/categoryComponents/CategorySidebar'; // Adjust the import path as needed
+import ProductSection from '../../components/categoryComponents/ProductSection'; // Adjust the import path as needed
 
 export function Categories() {
   return (

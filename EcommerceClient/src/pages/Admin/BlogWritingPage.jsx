@@ -104,4 +104,4 @@ export const BlogWritingPage = () => {
   );
 };
 
-export default BlogWritingPage;
+

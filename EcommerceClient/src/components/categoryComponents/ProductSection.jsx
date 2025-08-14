@@ -2,7 +2,7 @@ import React from 'react';
 import { products } from '../../../public/jsons/products'; // Adjust the import path as needed
 import ProductBox from './ProductBox';
 import { useLocation } from 'react-router-dom'; // Import useLocation to get query params
-import { ProductCard } from '../Home2/NewArrivals';
+import  {ProductCard}  from './NewArrivals';
 
 // Helper function to filter products by category and search term
 function filterProducts(category, searchTerm) {

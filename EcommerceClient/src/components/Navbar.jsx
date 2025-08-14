@@ -1,17 +1,19 @@
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import SearchDialog from "../SearchButton";
+import SearchDialog from "./SearchButton";
 import { ChevronDown, Menu, SearchIcon } from "lucide-react";
-import CategorySidebar from "../categoryComponents/CategorySidebar";
-import { categories } from "../../../public/jsons/categories";
+import CategorySidebar from "./categoryComponents/CategorySidebar";
+
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../ui/sheet";
-import { useState } from "react";
+} from "./ui/sheet";
+import { useEffect, useState } from "react";
+
+import http from "../http";
 
 
 export function capitalizeWords(str) {
@@ -30,9 +32,26 @@ export function capitalizeWords(str) {
   }
 export const Navbar = () => {
     const location = useLocation();
-      const navigate = useNavigate();
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [name, setName] = useState("");
+
+    const [loading, setLoading] = useState(false);
+    const [categories, setCategories] = useState([]);
+
+
+
+    const getCategoriesData = async() =>{
+      setLoading(true);
+      const {data} = await http.get("/categories");
+      setCategories(data.Categories);
+      setLoading(false)
+    }
+
+
+    useEffect(() =>{
+      getCategoriesData()
+    }, []);
   
     const isActive = (path) => location.pathname === path;
   
@@ -48,6 +67,11 @@ export const Navbar = () => {
       const term = convertToSlug(name);
       navigate(`/categories/?search=${term}`);
     };
+
+
+
+    console.log(categories);
+    
   
     return (
       <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 w-[80%] flex justify-between items-center p-4 shadow-md bg-white rounded-full px-8 mt-6 z-50">
@@ -56,7 +80,7 @@ export const Navbar = () => {
           {/* <img src="/assets/img/hawastore.jpeg" alt="Hawa" className="h-10" /> */}
           <img src="https://files.catbox.moe/s6ffdc.svg" alt="Hawa Store" className="h-10 hidden sm:flex" />
         </Link>
-        <ul className="hidden xl:flex space-x-6 text-gray-800 bg-red-500">
+        <ul className="hidden xl:flex space-x-6 text-gray-800">
           <li>
             <Link
               to="/categories"

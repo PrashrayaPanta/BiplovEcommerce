@@ -1,8 +1,3 @@
-import React from 'react';
-
-
-
-
 
 import  HeroSection  from '@/components/homeComponents/HeroSection';
 import  HomeCategoryBox  from '@/components/homeComponents/HomeCategoryBox';
@@ -29,6 +24,9 @@ import  FollowOnInsta  from '@/components/homeComponents/FollowOnInsta';
 // }
 
 export function Home() {
+
+  console.log("Ia m inside home page");
+  
   return (
     <div className="items-center justify-center">
       {/* <Suspense fallback={<div>Loading Hero Section...</div>}> */}
@@ -36,14 +34,12 @@ export function Home() {
 
       <HomeCategoryBox/>
 
-
       <NewArrivals/>
 
-      <PopularThisWeek/>
+      {/* <PopularThisWeek/> */}
 
-      <SmallNotice/>
-
-      <FollowOnInsta/>
+      {/* <SmallNotice/> */}
+      {/* <FollowOnInsta/> */}
 
     </div>
   );

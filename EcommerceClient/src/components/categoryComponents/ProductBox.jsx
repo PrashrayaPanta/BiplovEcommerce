@@ -1,15 +1,20 @@
+import { imgUrl } from "@/library";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useInView } from "react-intersection-observer";
+// import { useInView } from "react-intersection-observer";
 
 export default function ProductBox({ product }) {
-  const navigate = useNavigate();
 
+  console.log("I am inside ProductBox component");
+  console.log(product);
+
+
+  const navigate = useNavigate();
   // Intersection Observer
-  const { ref, inView } = useInView({
-    triggerOnce: true, // Load only once
-    threshold: 0.1, // Trigger when 10% of the component is visible
-  });
+  // const { ref, inView } = useInView({
+  //   triggerOnce: true, // Load only once
+  //   threshold: 0.1, // Trigger when 10% of the component is visible
+  // });
 
   // Calculate discount percentage
   const discount = product.fakePrice
@@ -19,9 +24,9 @@ export default function ProductBox({ product }) {
     : 0;
 
   return (
-    <div ref={ref}>
+    <div>
       {/* Attach ref to the outer div */}
-      {inView && (
+      {
         <div
           key={product.id}
           className="group relative rounded-lg transition-transform transform hover:scale-105"
@@ -33,34 +38,41 @@ export default function ProductBox({ product }) {
                 {discount}% Off
               </span>
             )}
-            <img
-              alt={product.name}
-              src={product.image[0]}
+
+        
+
+
+                {/* console.log(Image[0].public_id) */}
+
+                 {/* console.log(Image[0].url), */}
+               <img
+               alt="kjsndflk"
+              src={imgUrl(product?.images[0]?.public_id)}
               loading="lazy"
-              className="h-full w-full object-cover"
-            />
+               className="h-full w-full object-cover"
+              />
+    
           </div>
           <div className="p-4 flex flex-col justify-between min-h-36 bg-blue-500">
-        
-              <h3 className="text-sm font-semibold text-gray-800">
-                <a href={product.href}>{product.name}</a>
-              </h3>
-              {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
+            <h3 className="text-sm font-semibold text-gray-800">
+              <a href={product.href}>{product.name}</a>
+            </h3>
+            {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
             {/* </div> */}
             <div>
               <p className="text-md bg-blue-400 items-center flex gap-2 justify-center flex-wrap">
-                {product.fakePrice ? (
-                  <span className="line-through">Rs. {product.fakePrice}</span>
+                {product.discountedPrice > product.initialPrice ? (
+                  <span className="line-through">Rs. {product.discountedPrice}</span>
                 ) : (
                   ""
                 )}
-                Rs. {product.price}
+                Rs. {product.initialPrice}
               </p>
             </div>
           </div>
         </div>
-      )}
-      {inView && (
+      }
+      {
         <div className="flex justify-center mb-4 mt-20">
           <button
             onClick={() => {
@@ -71,7 +83,7 @@ export default function ProductBox({ product }) {
             View Product
           </button>
         </div>
-      )}
+      }
     </div>
   );
 }

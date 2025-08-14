@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { blogData } from '../../public/jsons/blogs'; // Assuming this is the file where your blog data is stored
+ // Assuming this is the file where your blog data is stored
 
 export function BlogDetail() {
   const { slug } = useParams();
@@ -30,4 +30,4 @@ export function BlogDetail() {
   );
 }
 
-export default BlogDetail;
+

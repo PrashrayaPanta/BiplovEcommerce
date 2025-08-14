@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { products } from "../../../public/jsons/products";
+
+
 import {
   Table,
   TableBody,
@@ -14,10 +15,49 @@ import { Info, Star, FileText } from "lucide-react";
 import Reviews from "./Reviews";
 import ProductGallery from "./ProductGallery";
 
-const ProductDescription = () => {
+export const ProductDescription = () => {
+
+
+  console.log("I am inside ProductDescription component");
+  
   const [activeTab, setActiveTab] = useState("details");
   const { slug } = useParams();
-  const product = products.find((item) => item.slug === slug);
+  // const product = products.find((item) => item.slug === slug);
+
+
+
+  // const fetchProduct = async () => {
+
+
+  //   try{
+
+
+  //         http.get("/products/")
+
+
+
+
+  //   }catch(error){
+
+
+
+
+  //   }
+        
+
+
+
+
+  // }
+
+
+
+  useEffect(() =>{
+ 
+
+    fetchProduct()
+
+  }, [slug])
 
   const tabs = [
     { id: "details", label: "Product Details", icon: FileText },
@@ -196,4 +236,3 @@ const ProductDescription = () => {
   );
 };
 
-export default ProductDescription;

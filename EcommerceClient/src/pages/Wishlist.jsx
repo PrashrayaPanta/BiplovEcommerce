@@ -1,5 +1,5 @@
 import WishProductBox from '@/components/wishlist/WishProductBox';
-import { products } from '../../public/jsons/products';
+
 import React from 'react'
 
 export function Wishlist() {

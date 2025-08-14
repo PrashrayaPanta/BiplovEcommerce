@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import {
   ChevronDown,
   Heart,
@@ -21,14 +21,14 @@ import {
 } from "./ui/sheet";
 import CartSheet from "./cartComponents/CartSheet";
 import SearchDialog from "./SearchButton";
-import {
-  ClerkLoaded,
-  ClerkLoading,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
+// import {
+//   ClerkLoaded,
+//   ClerkLoading,
+//   SignedIn,
+//   SignedOut,
+//   SignInButton,
+//   UserButton,
+// } from "@clerk/clerk-react";
 
 export function capitalizeWords(str) {
   return str

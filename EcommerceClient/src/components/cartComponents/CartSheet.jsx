@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { ShoppingCartIcon } from 'lucide-react';
-import { cartItems as initialCartItems } from '../../../public/jsons/cartItems';
+
 import CartItem from './CartItem';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -39,8 +39,8 @@ export default function CartSheet() {
           </span>
         </div>
       </SheetTrigger>
-      <SheetContent className="w-96 p-4 bg-white shadow-lg flex flex-col justify-between">
-        <div className="flex-1 overflow-y-auto">
+      <SheetContent className="w-96 p-4 bg-red-500 shadow-lg flex flex-col justify-between ">
+        <div className="flex-1 overflow-y-auto bg-red-500">
           <h2 className="text-lg font-bold text-gray-800 mb-4">Shopping Cart</h2>
           {cartItems.length > 0 ? (
             cartItems.map(item => (
@@ -70,7 +70,7 @@ export default function CartSheet() {
             onClick={()=>{
                 handleLinkClick("/cart")
             }}
-            className="text-sm text-blue-500 hover:underline mx-auto w-full text-center mb-2"
+            className="text-sm text-red-500 hover:underline mx-auto w-full text-center mb-2"
         >
             View Cart
         </button>
