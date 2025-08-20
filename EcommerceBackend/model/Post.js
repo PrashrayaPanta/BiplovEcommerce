@@ -7,6 +7,7 @@ const postSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
+      unique:true
     },
 
     postCategory: {
@@ -21,6 +22,14 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
+    slug:{
+      type: String,
+      unique:true
+    }
+
+
+
   },
 
   {

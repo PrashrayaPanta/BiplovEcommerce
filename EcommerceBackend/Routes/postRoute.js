@@ -78,6 +78,9 @@ postRoute.get("/admin/post", isAuthenticated, isAdmin, postCtrl.getAllPost);
 
 postRoute.get("/post", postCtrl.getAllPost);
 
+
+postRoute.get("/post/:slug", postCtrl.getPostBySlug)
+
 // postRoute.get("/post/:id", postCtrl.getPostByID);
 
 // productRoute.delete(

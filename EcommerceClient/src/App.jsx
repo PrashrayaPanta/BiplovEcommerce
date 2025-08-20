@@ -32,7 +32,7 @@ function App() {
           <Route path="/categories/:slug" element={<CategoriesBySlug />} />
           <Route path="/product/:slug" element={<Pages.ProductDescription />} />
           <Route path="/blogs" element={<Pages.Blog />} />
-          <Route path="/blog/:slug" element={<Pages.BlogDetail />} />
+          <Route path="/blogs/:slug" element={<Pages.BlogDetail />} />
           <Route path="/contact" element={<Pages.Contact />} />
           <Route path="/wishlist" element={<Pages.Wishlist />} />
           <Route path="/login" element={<Pages.Auth.Login />} />

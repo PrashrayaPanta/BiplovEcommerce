@@ -15,6 +15,8 @@ const postCtrl = {
 
     const tags = [req.body.tags];
 
+    const slug = title.trim().toLowerCase().replace(/\s+/g, "-");
+
     // console.log(tags);
 
     await Post.create({
@@ -22,6 +24,7 @@ const postCtrl = {
       postCategory: category,
       tags,
       content,
+      slug,
     });
 
     res.status(201).json({ message: "Post Craeted succesfully" });
@@ -53,6 +56,13 @@ const postCtrl = {
     const posts = await Post.find().populate("postCategory");
 
     res.status(201).json({ posts });
+  }),
+
+  getPostBySlug: asyncHandler(async (req, res) => {
+    const { slug } = req.params;
+    const post = await Post.findOne({ slug }).populate("postCategory");
+
+    res.status(200).json({ post });
   }),
 };
 

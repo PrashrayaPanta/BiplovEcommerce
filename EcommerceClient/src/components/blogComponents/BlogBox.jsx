@@ -10,10 +10,19 @@ function BlogBox({ title, date, content, slug, description }) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, "text/html");
 
-  const imgCha = doc.querySelector("img");
+  // console.log("This is the document");
+
+  // console.log(doc);
+
+  // const imgCha = doc.querySelector("img");
+
+  // console.log(imgCha);
+
+  // console.log(imgCha);
+
   const imgSrc = doc.querySelector("img")?.getAttribute("src");
 
-  console.log(imgSrc);
+  // console.log(imgSrc);
 
   // yedi imgSrc ko value cha vani img src vanni ma imgSrc halni natra
 
@@ -27,9 +36,8 @@ function BlogBox({ title, date, content, slug, description }) {
     <div className="p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
       <img
         src={
-          imgSrc
-            ? imgSrc
-            : "https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg"
+          imgSrc ||
+          "https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg"
         }
         alt={title}
         className="w-full h-48 object-cover rounded-t-lg mb-4"
@@ -40,7 +48,7 @@ function BlogBox({ title, date, content, slug, description }) {
         className="text-gray-700 mb-4"
         dangerouslySetInnerHTML={{ __html: truncatedDescription }}
       ></p>
-      <Link to={`/blog/${slug}`} className="text-orange-500 hover:underline">
+      <Link to={`/blogs/${slug}`} className="text-orange-500 hover:underline">
         Read more
       </Link>
     </div>
