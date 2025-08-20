@@ -2,13 +2,12 @@ const mongoose = require("mongoose");
 
 const reviewSchema = new mongoose.Schema(
   {
-
-    comment:{
-        type:String,
+    comment: {
+      type: String,
     },
 
-    rating:{
-        type: String,
+    rating: {
+      type: String,
     },
   },
   {

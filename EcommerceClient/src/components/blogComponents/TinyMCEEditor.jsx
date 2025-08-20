@@ -1,13 +1,44 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-export const tinyMceApiKey = "ndo1wi5r3kxwm9qkqf3equfk6i8qbszwumz83ilkvlftpmjf";
+export const tinyMceApiKey = import.meta.env.VITE_TINYMCE_API_KEY || "";
+
+const uploadImageToServer = async (blobInfo) => {
+  const formData = new FormData();
+  formData.append("image", blobInfo.blob(), blobInfo.filename());
+
+  const token = JSON.parse(localStorage.getItem("userInfo"))?.token;
+
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/admin/post/upload`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    }
+  );
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(
+      `Upload failed (${response.status}): ${errorBody || "Unknown error"}`
+    );
+  }
+
+  const data = await response.json();
+  if (!data?.url) {
+    throw new Error("Upload succeeded but server returned no URL");
+  }
+  return data.url;
+};
 
 const TinyMCEEditor = ({ content, onEditorChange }) => {
   return (
     <Editor
       apiKey={tinyMceApiKey}
-      initialValue="<p>Start writing your blog post here...</p>"
+      initialValue=""
       init={{
         height: 500,
         menubar: true,
@@ -30,11 +61,15 @@ const TinyMCEEditor = ({ content, onEditorChange }) => {
           table { width: 100%; border-collapse: collapse; }
           table, th, td { border: 1px solid black; padding: 5px; text-align: left; }
         `,
-        images_upload_handler: (blobInfo, success, failure) => {
-          // Replace this with your backend upload logic.
-          setTimeout(() => {
-            success("https://via.placeholder.com/150"); // Replace with uploaded image URL.
-          }, 1000);
+        images_upload_handler: async (blobInfo, success, failure) => {
+          try {
+            console.log(blobInfo);
+
+            const url = await uploadImageToServer(blobInfo);
+            success(url);
+          } catch (err) {
+            failure(err?.message || "Image upload failed");
+          }
         },
       }}
       value={content}

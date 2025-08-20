@@ -47,7 +47,7 @@ export default function ProductBox({ product }) {
                  {/* console.log(Image[0].url), */}
                <img
                alt="kjsndflk"
-              src={imgUrl(product?.images[0]?.public_id)}
+              src={imgUrl(product?.images?.[0]?.public_id)}
               loading="lazy"
                className="h-full w-full object-cover"
               />
@@ -55,18 +55,21 @@ export default function ProductBox({ product }) {
           </div>
           <div className="p-4 flex flex-col justify-between min-h-36 bg-blue-500">
             <h3 className="text-sm font-semibold text-gray-800">
-              <a href={product.href}>{product.name}</a>
+              <a href={product.href}>
+              <span aria-hidden="true" className="absolute inset-0" />
+              {product.name}
+              </a>
             </h3>
-            {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
+            <p className="mt-1 text-sm text-gray-500">{product.color}</p>
             {/* </div> */}
             <div>
               <p className="text-md bg-blue-400 items-center flex gap-2 justify-center flex-wrap">
-                {product.discountedPrice > product.initialPrice ? (
-                  <span className="line-through">Rs. {product.discountedPrice}</span>
+                {product.originalPrice > product.price ? (
+                  <span className="line-through">Rs. {product.originalPrice}</span>
                 ) : (
                   ""
                 )}
-                Rs. {product.initialPrice}
+                Rs. {product.price}
               </p>
             </div>
           </div>

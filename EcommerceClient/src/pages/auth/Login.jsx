@@ -15,12 +15,17 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link, useNavigate } from "react-router-dom"; // Import Link for navigation
 import InputField from "@/components/InputField";
-import  {SubmitBtn}  from "@/components/SubmitBtn.jsx";
+import { SubmitBtn } from "@/components/SubmitBtn.jsx";
 import { useState } from "react";
 
+import http from "../../http";
 
+import { ToStorage } from "@/library";
+
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store";
 
 // const loginSchema = z.object({
 //   username: z.string().min(2, {
@@ -31,14 +36,12 @@ import { useState } from "react";
 //   }),
 // });
 
-
-
-
 export function Login() {
+  const dispatch = useDispatch();
 
+  const navigate = useNavigate();
 
   const [remember, setRemember] = useState(false);
-
 
   const formik = useFormik({
     initialValues: {
@@ -52,46 +55,39 @@ export function Login() {
     }),
 
     onSubmit: (data, { setSubmitting }) => {
-
-
-      const PostLoginData = async() =>{
-
-
-        try{
-
-
-        }catch({response}){
-          formik.setFieldError("email", response?.data?.message);
-        }finally{
-
-          setSubmitting(false);
-
-
-        }
-
-
-      }
-      // console.log("Hello");
-
       console.log(data);
 
-      async function PostData() {
+      async function PostLoginData() {
         try {
+          console.log("I am inside the posty login data");
+
           const response = await http.post("/users/login", data);
 
+          // console.log(response);
 
-          
+          // console.log("I am after the response");
 
+          // console.log(response);
 
-          console.log(response)
+          // console.log(response)
 
-          console.log(response.data);
+          // console.log(response.data.token);
 
-          ToStorage("customerPartToken", response.data.token, remember);
+          // if (response.data.isAdmin) {
+          //   ToStorage("adminToken", response.data.token, remember);
+          // } else {
+          //   ToStorage("customerToken", response.data.token, remember);
+          // }
 
           dispatch(setUser(response.data));
 
           navigate("/");
+
+          localStorage.setItem("userInfo", JSON.stringify(response.data));
+
+          // ToStorage("adminToken", response.data.token, remember);
+
+          // console.log("I am after the ToSring");
 
           // response.data.token);
 
@@ -105,7 +101,7 @@ export function Login() {
         }
       }
 
-      PostData();
+      PostLoginData();
 
       //   setTimeout(() => setSubmitting(false), 2000);
       // console.log(setSubmitting);
@@ -169,8 +165,7 @@ export function Login() {
 
         <SubmitBtn formik={formik} label="Login" />
       </div>
-    
-  
+
       {/* Registration Prompt */}
       <p className="mt-4 text-center text-gray-600">
         Don't have an account?

@@ -6,7 +6,7 @@ const Product = require("../model/Product.js");
 
 const User = require("../model/User.js");
 
-const Category = require("../model/Category.js");
+// const Category = require("../model/Category.js");
 const Order = require("../model/Order.js");
 
 const orderCtrl = {

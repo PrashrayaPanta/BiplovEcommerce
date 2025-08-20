@@ -36,10 +36,10 @@ export function Home() {
 
       <NewArrivals/>
 
-      {/* <PopularThisWeek/> */}
+      <PopularThisWeek/>
 
-      {/* <SmallNotice/> */}
-      {/* <FollowOnInsta/> */}
+      <SmallNotice/>
+      <FollowOnInsta/>
 
     </div>
   );

@@ -8,7 +8,7 @@ const User = require("../model/User.js");
 
 const cloudinary = require("cloudinary").v2; // Import the Brand model
 
-const Category = require("../model/Category.js");
+// const Category = require("../model/Category.js");
 
 const subCategory = require("../model/SubCategory.js");
 
@@ -16,24 +16,25 @@ const Brand = require("../model/Brand.js");
 const { deleteOnlyImageHandler } = require("./File.js");
 const Review = require("../model/Review.js");
 const PriceHistory = require("../model/PriceHistory.js"); // Import the PriceHistory model
+const ProductCategory = require("../model/productCategory.js");
 
 const productCtrl = {
   createProduct: asyncHandler(async (req, res) => {
     console.log("Request body:", req.body); // Log the entire request body
 
     const {
-      name,
+      title,
       description,
       categoryId,
       originalPrice,
-      colors,
-      sizes,
-      brandId,
       summary,
+      slug,
       price,
+      key,
+      value,
     } = req.body;
 
-    if (!name || !description || !categoryId || !originalPrice) {
+    if (!title || !description || !categoryId || !originalPrice) {
       return res
         .status(400)
         .json({ message: "Some fields are missing in the request body" });
@@ -41,33 +42,16 @@ const productCtrl = {
 
     // console.log(discountPercentage);
 
-    const category = await Category.findById(categoryId);
+    const category = await ProductCategory.findById(categoryId);
 
     console.log(category);
-
-    const brand = await Brand.findById(brandId);
-
-    console.log(brand);
-
-    // Parse JSON strings for colors and sizes
-    const parsedColors =
-      typeof colors === "string" ? JSON.parse(colors) : colors;
-    const parsedSizes = typeof sizes === "string" ? JSON.parse(sizes) : sizes;
-
-    // console.log(typeof parsedColors, typeof parsedSizes);
-
-    console.log(typeof parsedColors);
-
-    const slug = name.split(" ").join("-");
-
-    console.log(slug);
 
     // const categoryDocument = await Category.findOne({_id: categoryId});
 
     // console.log(categoryDocument)
 
     const images = await Promise.all(
-      req.files.map(async (file) => {
+      req.files?.map(async (file) => {
         return {
           url: file.path,
           public_id: file.filename,
@@ -78,18 +62,18 @@ const productCtrl = {
     // Create the product
     const product = await Product.create({
       images,
-      name,
+      title,
       summary,
       description,
       price,
       originalPrice,
       slug,
-      colors: parsedColors,
-      sizes: parsedSizes,
       categoryId,
-      categoryName: category?.name,
-
+      productDetails: { key, value },
+      categoryName: category?.title,
     });
+
+    console.log(product);
 
     // console.log(product);
 
@@ -121,9 +105,7 @@ const productCtrl = {
     });
 
     // Delete product from database
-    await Product.findByIdAndDelete(id, {deleted:true});
-
-
+    await Product.findByIdAndDelete(id, { deleted: true });
 
     console.log("Successfully deleted");
 
@@ -183,10 +165,7 @@ const productCtrl = {
 
     const { id } = req.params;
 
-    const product = await Product.findById(id).populate({
-      path: "reviews.DoneBy",
-      select: "username email",
-    });
+    const product = await Product.findById(id);
 
     console.log(product);
 
@@ -208,11 +187,9 @@ const productCtrl = {
 
     // const { id } = req.params;
 
+    const { slug } = req.params;
 
-
-    const {slug} = req.params;
-
-    const products = await Product.find({ categoryName:slug });
+    const products = await Product.find({ categoryName: slug });
 
     console.log(products);
 
@@ -220,9 +197,8 @@ const productCtrl = {
   }),
 
   getAllProductByBrandId: asyncHandler(async (req, res) => {
-
     console.log("I am inside the get all product by brand Id");
-    
+
     // const { id } = req.params;
 
     // console.log(id);
@@ -231,7 +207,7 @@ const productCtrl = {
 
     console.log(slug);
 
-    const products = await Product.find({  brandName:slug });
+    const products = await Product.find({ brandName: slug });
 
     console.log(products);
 
@@ -253,7 +229,6 @@ const productCtrl = {
     console.log("I am inside the edit certain product controoler");
 
     console.log(req.files);
-    
 
     const { id } = req.params;
 
@@ -270,9 +245,7 @@ const productCtrl = {
       })
     );
 
-  
-  // console.log(images);
-  
+    // console.log(images);
 
     const {
       name,
@@ -432,33 +405,38 @@ const productCtrl = {
   // }),
 
   createCertainProductReviews: asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    const product = await Product.findById(id).select(
-      "-description -images -colors -sizes"
-    );
-    // console.log(product);
+    console.log("Hello Ia m inside the certain producy reviews");
+
+    console.log("I am inside oproduct review");
+
+    const { slug } = req.params;
+
+    const product = await Product.findOne({ slug });
+    console.log(product);
     if (!product) {
       throw new Error("The product id provided trhere is not ");
     }
 
     //create the reviews
-    const { comment, rating } = req.body;
+    const { reviewerName, reviewerComment, reviewerEmail } = req.body;
 
     // console.log(comment, rating);
 
-    product?.reviews.push({ comment, rating, DoneBy: req.user_id });
+    product?.reviews.push({
+      reviewerName,
+      reviewerEmail,
+      reviewerComment,
+    });
     await product?.save();
     res.json({ message: "review Created Succesfully", product });
   }),
 
   getCertainProductReviews: asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const { slug } = req.params;
 
-    const productReviews = await Product.findById(id).populate(
-      "reviews.DoneBy"
-    );
+    const reviews = await Product.findOne({ slug });
 
-    res.json({ productReviews });
+    res.json({ reviews });
   }),
 
   updateProductPrice: asyncHandler(async (req, res) => {
@@ -485,6 +463,14 @@ const productCtrl = {
     });
 
     res.json({ message: "Product price updated successfully", product });
+  }),
+
+  getProductBySlug: asyncHandler(async (req, res) => {
+    const { slug } = req.params;
+
+    const product = await Product.findOne({ slug });
+
+    res.json({ product });
   }),
 
   // getAllProductsReviews: asyncHandler(async(req, res) =>{

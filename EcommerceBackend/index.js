@@ -16,17 +16,20 @@ const mongoose = require("mongoose");
 
 const errorHandler = require("./middleware/errHandler");
 
-const categoryRoute = require("./Routes/categoryRoute.js");
-
 const productRoute = require("./Routes/productRoute.js");
 const orderRoute = require("./Routes/orderRoute.js");
 const brandRoute = require("./Routes/brandRoute.js");
 const addressRoute = require("./Routes/addressRoute.js");
 
+const postRoute = require("./Routes/postRoute.js");
+
 const reviewRoute = require("./Routes/reviewRoute.js");
 const deviceRoute = require("./Routes/deviceRoute.js");
 
 const subCategoryRoute = require("./Routes/subCategoryRoute.js");
+
+const productCategoryRoute = require("./Routes/productCategoryRoute.js");
+const postCategoryRoute = require("./Routes/postCategoryRoute.js");
 
 const PORT = process.env.PORT || 3000;
 
@@ -52,21 +55,25 @@ app.use(express.json());
 
 //!Routes
 
-app.use("/api", categoryRoute);
+// app.use("/api", categoryRoute);
 
 app.use("/api", subCategoryRoute);
 
 app.use("/api", userRoute);
 
-// app.use("/api/order". orderRoute);
-
 app.use("/api", productRoute);
+
+app.use("/api", postRoute);
 
 app.use("/api", orderRoute);
 
 app.use("/api", brandRoute);
 
 app.use("/api", reviewRoute);
+
+app.use("/api", productCategoryRoute);
+
+app.use("/api", postCategoryRoute);
 
 app.use("/api/address", addressRoute);
 

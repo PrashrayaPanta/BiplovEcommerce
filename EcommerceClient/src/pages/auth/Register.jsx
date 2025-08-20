@@ -60,23 +60,17 @@ export function Register() {
 
       console.log(data);
 
-      async function PostData() {
+      async function PostRegisterData() {
         console.log("I am insidce post data call");
 
         try {
           const response = await http.post("/users/register", data);
 
-          console.log(response);
-
-
-        
+          console.log(response);        
         
           navigate("/login");
 
-          
-
-
-
+        
 
           // ToStorage("customerPartToken", response.data.token, remember);
 
@@ -96,7 +90,7 @@ export function Register() {
         }
       }
 
-      PostData();
+      PostRegisterData();
 
       //   setTimeout(() => setSubmitting(false), 2000);
       // console.log(setSubmitting);

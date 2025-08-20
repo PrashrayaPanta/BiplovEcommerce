@@ -1,8 +1,9 @@
-import { ProductEntryForm } from "./ProductEntryForm";
+import * as Post from "./Post";
+import * as Product from "./Product";
+import * as CategoryProduct from "./CategoryProduct";
+import * as CategoryPost from "./CategoryPost";
+
+export { Post, Product, CategoryPost, CategoryProduct };
 
 
-import {BlogWritingPage} from "./BlogWritingPage";
 
-
-
-export { ProductEntryForm , BlogWritingPage };

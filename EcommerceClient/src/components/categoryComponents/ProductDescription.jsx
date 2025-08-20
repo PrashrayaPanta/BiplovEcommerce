@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-
 import {
   Table,
   TableBody,
-  TableCell,  
+  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -14,50 +13,30 @@ import { motion } from "framer-motion";
 import { Info, Star, FileText } from "lucide-react";
 import Reviews from "./Reviews";
 import ProductGallery from "./ProductGallery";
+import http from "@/http";
 
 export const ProductDescription = () => {
-
-
   console.log("I am inside ProductDescription component");
-  
+
   const [activeTab, setActiveTab] = useState("details");
   const { slug } = useParams();
-  // const product = products.find((item) => item.slug === slug);
 
+  const [product, setProduct] = useState({});
 
+  const fetchgetProductBySlug = async () => {
+    const { data } = await http.get(`/products/${slug}`);
 
-  // const fetchProduct = async () => {
+    // console.log(data);
 
+    setProduct(data.product);
+  };
 
-  //   try{
+  useEffect(() => {
+    // fetchProduct();
+    fetchgetProductBySlug();
+  }, [slug]);
 
-
-  //         http.get("/products/")
-
-
-
-
-  //   }catch(error){
-
-
-
-
-  //   }
-        
-
-
-
-
-  // }
-
-
-
-  useEffect(() =>{
- 
-
-    fetchProduct()
-
-  }, [slug])
+  console.log(product);
 
   const tabs = [
     { id: "details", label: "Product Details", icon: FileText },
@@ -67,7 +46,7 @@ export const ProductDescription = () => {
 
   if (!product) {
     return (
-      <div className="bg-gray-100 dark:bg-gray-800 py-8">
+      <div className="bg-gray-100 dark:bg-gray-800 py-8 mt-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-red-600 mb-4">
             Product not found
@@ -85,13 +64,16 @@ export const ProductDescription = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:grid grid-cols-2 -mx-4">
           <div className="px-4">
-              <ProductGallery images={product.image}/>
+            <ProductGallery images={product?.images} />
             <div className="flex -mx-2 mb-4">
+              {/* add To Cart */}
               <div className="w-1/2 px-2">
                 <button className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">
                   Add to Cart
                 </button>
               </div>
+
+              {/* Add to WishList */}
               <div className="w-1/2 px-2">
                 <button className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">
                   Add to Wishlist
@@ -101,15 +83,15 @@ export const ProductDescription = () => {
           </div>
           <div className="md:flex-1 px-4">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-              {product.name}
+              Product Name:{product?.title}
             </h2>
             <div className="flex mb-4">
               <div className="mr-4">
                 <span className="font-bold text-gray-700 dark:text-gray-300">
-                  Price:
+                  Price: {product.price}
                 </span>
                 <span className="text-gray-600 dark:text-gray-300">
-                  ${product.price / 100}
+                  ${product?.price / 100}
                 </span>
               </div>
               <div>
@@ -117,17 +99,17 @@ export const ProductDescription = () => {
                   Availability:
                 </span>
                 <span className="text-gray-600 dark:text-gray-300">
-                  {product.fakePrice ? "In Stock" : "Out of Stock"}
+                  {/* {product?.fakePrice ? "In Stock" : "Out of Stock"} */}
                 </span>
               </div>
             </div>
             <div>
               <span className="font-bold text-gray-700 dark:text-gray-300">
-                Product Description:
+                Product Description: {product.description}
               </span>
               <div
                 className="text-gray-600 dark:text-gray-300 text-sm mt-2"
-                dangerouslySetInnerHTML={{ __html: product.description }}
+                // dangerouslySetInnerHTML={{ __html: product?.description }}
               />
             </div>
           </div>
@@ -184,20 +166,21 @@ export const ProductDescription = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {product.details && Object.keys(product.details).map((key) => (
-                      <TableRow key={key}>
-                        <TableCell className="font-bold">
-                          {key
-                            .split(/(?=[A-Z])/)
-                            .map(
-                              (word) =>
-                                word.charAt(0).toUpperCase() + word.slice(1)
-                            )
-                            .join(" ")}
-                        </TableCell>
-                        <TableCell>{product.details[key]}</TableCell>
-                      </TableRow>
-                    ))}
+                    {product?.productDetails &&
+                      Object.keys(product?.productDetails).map((key) => (
+                        <TableRow key={key}>
+                          <TableCell className="font-bold">
+                            {key
+                              .split(/(?=[A-Z])/)
+                              .map(
+                                (word) =>
+                                  word.charAt(0).toUpperCase() + word.slice(1)
+                              )
+                              .join(" ")}
+                          </TableCell>
+                          <TableCell>{product?.productDetails[key]}</TableCell>
+                        </TableRow>
+                      ))}
                   </TableBody>
                 </Table>
               </motion.div>
@@ -235,4 +218,3 @@ export const ProductDescription = () => {
     </div>
   );
 };
-

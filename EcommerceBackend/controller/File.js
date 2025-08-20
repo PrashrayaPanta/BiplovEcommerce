@@ -64,9 +64,6 @@ const getImageDetailsHandlerForProduct = async (req, res) => {
   try {
     const { filename } = req.params;
 
-
-
-
     // console.log(req.path);
 
     // const twoArray = req.path.split("/");
@@ -81,32 +78,21 @@ const getImageDetailsHandlerForProduct = async (req, res) => {
     // Fetch image details from Cloudinary  `
     // const result = await cloudinary.api.resource(publicID);
 
-
-    
-    const result =  cloudinary.url(publicID, {
+    const result = cloudinary.url(publicID, {
       quality: "auto",
       fetch_format: "auto",
     });
 
-  
-
-
     // console.log("succesfull get the image");
 
-
     // console.log(result);
 
     // console.log(result);
 
-    res.redirect(result)
-    
-
-    
+    res.redirect(result);
 
     // Redirect the client to the image URL
     // res.redirect(result.secure_url);
-
-
   } catch (error) {
     console.log(error);
   }
@@ -156,12 +142,9 @@ const deleteImageHandlerForProduct = async (req, res) => {
 
   console.log(filename);
 
-
-  
   const publicIdFull = `nodejsproductImages/${filename}`;
 
   // console.log(publicIdFull);
-  
 
   // console.log(publicIdFull);
 
@@ -171,37 +154,29 @@ const deleteImageHandlerForProduct = async (req, res) => {
 
     const product = await Product.findById(id);
 
-
     console.log(product);
-    
 
     // console.log(product);
 
     const Images = product?.images;
 
     console.log(Images);
-    
 
     //filter on the basis of public_id match or not
     const filteredArrayImage = Images.filter(
       (image) => image.public_id !== publicIdFull
     );
 
-
     console.log(filteredArrayImage);
-    
 
-   
-      // Update the Product document to remove the
-    const updatedProduct =   await Product.findByIdAndUpdate(
-        id,
-        { images: filteredArrayImage }, // set the images with filteredArrayImage
-        { new: true }
-      );
+    // Update the Product document to remove the
+    const updatedProduct = await Product.findByIdAndUpdate(
+      id,
+      { images: filteredArrayImage }, // set the images with filteredArrayImage
+      { new: true }
+    );
 
     console.log(updatedProduct);
-      
-
 
     res.status(200).json({
       message: "Image deleted successfully and Product updated",
