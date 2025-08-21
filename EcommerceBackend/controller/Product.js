@@ -42,9 +42,12 @@ const productCtrl = {
 
     // console.log(discountPercentage);
 
-    const category = await ProductCategory.findById(categoryId);
+    const productCategory = await ProductCategory.findById(categoryId);
 
-    console.log(category);
+    console.log(productCategory);
+    
+
+    // console.log(category);
 
     // const categoryDocument = await Category.findOne({_id: categoryId});
 
@@ -70,7 +73,8 @@ const productCtrl = {
       slug,
       categoryId,
       productDetails: { key, value },
-      categoryName: category?.title,
+      categoryName: productCategory?.title,
+      productCategorySlug: productCategory?.slug
     });
 
     console.log(product);
@@ -182,14 +186,18 @@ const productCtrl = {
     });
   }),
 
-  getAllProductByCategoryId: asyncHandler(async (req, res) => {
+  getAllProductByCategorySlug: asyncHandler(async (req, res) => {
     console.log("I am inside the get all product by category Id");
 
     // const { id } = req.params;
 
     const { slug } = req.params;
 
-    const products = await Product.find({ categoryName: slug });
+
+    console.log(slug);
+    
+
+    const products = await Product.find({ productCategorySlug: slug });
 
     console.log(products);
 

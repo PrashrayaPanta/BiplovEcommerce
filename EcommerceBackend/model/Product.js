@@ -50,7 +50,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
 
-    slug: {
+    productCategorySlug: {
       type: String,
       required: true,
     },

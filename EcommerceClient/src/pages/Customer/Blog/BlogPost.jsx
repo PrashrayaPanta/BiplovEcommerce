@@ -31,6 +31,7 @@ export function BlogPost() {
             key={index}
             content={blog.content}
             title={blog.title}
+            tags={blog.tags}
             date={dtFormat(blog.createdAt)}
             slug={blog.slug}
             description={blog.content}

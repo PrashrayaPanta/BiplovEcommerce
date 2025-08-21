@@ -67,6 +67,10 @@ export const ProductEntryForm = () => {
   //   details: {},
   // });
 
+
+  console.log(productCategories);
+  
+
   const formik = useFormik({
     initialValues: {
       title: "",

@@ -49,6 +49,9 @@ const productCategoryCtrl = {
 
   getAllProductCategoryBySlug: asyncHandler(async(req, res) =>{
 
+
+    const {slug} = req.params;
+
     const productCategories = await ProductCategory.findOne({slug});
 
 

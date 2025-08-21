@@ -85,16 +85,20 @@ export const ProductDescription = () => {
             </div>
           </div>
           <div className="md:flex-1 px-4">
+
+            {/* Product Title */}
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
               Product Name:{product?.title}
             </h2>
             <div className="flex mb-4">
+
+                {/* Price Part */}
               <div className="mr-4">
                 <span className="font-bold text-gray-700 dark:text-gray-300">
                   Price: {product.price}
                 </span>
                 <span className="text-gray-600 dark:text-gray-300">
-                  ${product?.price / 100}
+                 OrginalPrice:{product?.originalPrice}
                 </span>
               </div>
               <div>
@@ -107,12 +111,17 @@ export const ProductDescription = () => {
               </div>
             </div>
             <div>
+
+                {/* Product belonging to which  Category Name */}
               <span className="font-bold text-gray-700 dark:text-gray-300">
-                Product Description: {product.description}
+               Category Name: {product.categoryName}
               </span>
+
+
+              {/* Product Description coming from TinyMCE Editor*/}  
               <div
                 className="text-gray-600 dark:text-gray-300 text-sm mt-2"
-                // dangerouslySetInnerHTML={{ __html: product?.description }}
+                dangerouslySetInnerHTML={{ __html: product?.description }}
               />
             </div>
           </div>

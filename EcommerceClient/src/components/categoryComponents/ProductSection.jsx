@@ -54,15 +54,20 @@ function ProductSection({ title, products = [], isLoading }) {
           Searching for: <strong>{searchProduct}</strong>
         </p>
       )}
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <ProductCard key={product.name} product={product} />
-          ))
-        ) : (
-          <p>No products found for this category or search term.</p> // Message if no products found
-        )}
-      </div>
+
+      {isLoading ? (
+        <LoadingComponent />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <ProductCard key={product.name} product={product} />
+            ))
+          ) : (
+            <p>No products found for this category or search term.</p> // Message if no products found
+          )}
+        </div>
+      )}
     </div>
   );
 }

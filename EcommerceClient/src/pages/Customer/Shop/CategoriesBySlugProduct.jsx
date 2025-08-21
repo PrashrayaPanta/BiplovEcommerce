@@ -9,6 +9,10 @@ import { useParams } from "react-router-dom";
 
 
 const CategoriesBySlugProduct = () => {
+
+
+  console.log("I am inside categoriuesd by slug poroduct");
+  
   const { slug } = useParams();
 
   const [categoryProducts, setCategoryProducts] = useState([]);
@@ -19,7 +23,7 @@ const CategoriesBySlugProduct = () => {
   const getCategoriesProducts = async () => {
     setLoading(true);
 
-    const { data } = await http.get(`/categories/${slug}/products`);
+    const { data } = await http.get(`/productCategory/${slug}/products`);
 
     setCategoryProducts(data.products);
 
@@ -28,13 +32,17 @@ const CategoriesBySlugProduct = () => {
 
   useEffect(() => {
     getCategoriesProducts();
-  }, []);
+  }, [slug]);
+
+
+
+  
 
   return (
     <div className="flex flex-col md:flex-row p-6 mt-20">
 
 
-      <CategorySidebar />
+      <CategorySidebar  />
 
       <ProductSection
         title={`Product by ${slug} category `}

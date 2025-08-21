@@ -13,47 +13,56 @@ import http from '../../http';
 
 
 // Function to count products in each category
-function countProductsByCategory() {
-  const categoryCounts = {};
+// function countProductsByCategory() {
 
-  // Loop through each product and increment the count for each of its categories
-  products.forEach(product => {
-    product.categories.forEach(category => {
-      if (!categoryCounts[category]) {
-        categoryCounts[category] = 0;
-      }
-      categoryCounts[category]++;
-    });
-  });
 
-  return categoryCounts;
-}
+//   const [products, setProducts] = useState([]);
+
+//   const getProducts = async() =>{
+
+//       const {data} = await http.get("/products");
+
+//       setProducts(data.products)
+
+//   }
+
+
+//   useEffect(() =>{
+//     getProducts();
+//   },[])
+
+
+//   console.log(products);
+  
+ 
+
+
+//   // const categoryCounts = {};
+
+//   // // Loop through each product and increment the count for each of its categories
+//   // products.forEach(product => {
+//   //   product.categories.forEach(category => {
+//   //     if (!categoryCounts[category]) {
+//   //       categoryCounts[category] = 0;
+//   //     }
+//   //     categoryCounts[category]++;
+//   //   });
+//   // });
+
+//   // return categoryCounts;
+// }
 
 function CategorySidebar() {
-  const categoryCounts = countProductsByCategory();
+
+  // const categoryCounts = countProductsByCategory();
 
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
 
-
-  // const getCategoriesData = async() =>{
-  //   setLoading(true);
-  //   const {data} = await http.get("/ca");
-  //   setCategories(data.Categories);
-  //   setLoading(false)
-  // }
-
-
-  // useEffect(() =>{
-  //   getCategoriesData();
-  // }, []);
-
-
-  // console.log(categories);
-
-
   const [productCategories, setProductCategories] = useState([]);
+
+
 
   const getProductCategoriesData = async () => {
     setLoading(true);
@@ -66,6 +75,10 @@ function CategorySidebar() {
   useEffect(() => {
     getProductCategoriesData()
   }, []);
+
+
+  console.log(productCategories);
+  
   
 
 
@@ -82,7 +95,8 @@ function CategorySidebar() {
               {category.title}
             </p>
             <span className="text-sm text-gray-500">
-              {categoryCounts[category.slug] || 0} {/* Display count or 0 if no products */}
+              0
+              {/* {categoryCounts[category.slug] || 0} Display count or 0 if no products */}
             </span>
           </Link>
         ))}

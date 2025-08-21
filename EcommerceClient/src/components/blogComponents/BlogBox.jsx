@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function BlogBox({ title, date, content, slug, description }) {
+function BlogBox({ title, date, content, slug, description , tags}) {
   console.log(content);
 
   const htmlString = content;
@@ -10,15 +10,6 @@ function BlogBox({ title, date, content, slug, description }) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, "text/html");
 
-  // console.log("This is the document");
-
-  // console.log(doc);
-
-  // const imgCha = doc.querySelector("img");
-
-  // console.log(imgCha);
-
-  // console.log(imgCha);
 
   const imgSrc = doc.querySelector("img")?.getAttribute("src");
 
@@ -46,8 +37,8 @@ function BlogBox({ title, date, content, slug, description }) {
       <p className="text-gray-500 text-sm mb-4">{date}</p>
       <p
         className="text-gray-700 mb-4"
-        dangerouslySetInnerHTML={{ __html: truncatedDescription }}
-      ></p>
+        // dangerouslySetInnerHTML={{ __html:  tags[0] }}
+      >{tags[0]}</p>
       <Link to={`/blogs/${slug}`} className="text-orange-500 hover:underline">
         Read more
       </Link>

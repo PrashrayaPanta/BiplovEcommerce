@@ -16,6 +16,7 @@ const {
   getImageDetailsHandlerForProduct,
   deleteImageHandlerForProduct,
 } = require("../controller/File.js");
+const { getAllBrand } = require("../controller/Brand.js");
 
 const cloudinary = require("cloudinary").v2;
 
@@ -159,6 +160,8 @@ productRoute.get(
 // productRoute.get("/sub-categories/:id/products", productCtrl.getAllProductsBySubCategoryId)
 
 // productRoute.get("/products/categories/:id/products", productCtrl.getAllProductByCategoryId)
+
+productRoute.get("/productCategory/:slug/products", productCtrl.getAllProductByCategorySlug)
 
 //! Top Latest Product
 
