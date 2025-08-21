@@ -25,7 +25,7 @@ function HomeCategoryBox() {
   return (
     <div className="mx-auto py-24 w-4/5 md:w-7/10 lg:w-3/5">
       <div className="text-center text-2xl font-semibold mb-6">
-        Shop By Categories
+        Shop By Product Ko Categories
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
         {categories?.map((cat) => (

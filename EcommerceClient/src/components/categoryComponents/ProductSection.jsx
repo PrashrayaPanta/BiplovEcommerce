@@ -43,32 +43,26 @@ function ProductSection({ title, products = [], isLoading }) {
 
   return (
     <div className="p-6">
-       {/* Show the selected category or 'Our Products' if none is selected */}
-       <h2 className="text-2xl font-semibold mb-4">
+      {/* Show the selected category or 'Our Products' if none is selected */}
+      <h2 className="text-2xl font-semibold mb-4">
         {searchCategory
           ? `Products in "${capitalizeWords(searchCategory)}"`
-          : 'Our Products'}
+          : "Our Products"}
       </h2>
-
       {searchProduct && (
         <p className="text-md mb-2">
           Searching for: <strong>{searchProduct}</strong>
         </p>
-      )} *
-
-      {isLoading ? (
-        <LoadingComponent />
-      ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
-          {products.length > 0 ? (
-            products.map((product) => (
-              <ProductCard key={product.name} product={product} />
-            ))
-          ) : (
-            <p>No products found for this category or search term.</p> // Message if no products found
-          )}
-        </div>
       )}
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
+        {products.length > 0 ? (
+          products.map((product) => (
+            <ProductCard key={product.name} product={product} />
+          ))
+        ) : (
+          <p>No products found for this category or search term.</p> // Message if no products found
+        )}
+      </div>
     </div>
   );
 }

@@ -37,20 +37,35 @@ function CategorySidebar() {
 
 
 
-  const getCategoriesData = async() =>{
+  // const getCategoriesData = async() =>{
+  //   setLoading(true);
+  //   const {data} = await http.get("/ca");
+  //   setCategories(data.Categories);
+  //   setLoading(false)
+  // }
+
+
+  // useEffect(() =>{
+  //   getCategoriesData();
+  // }, []);
+
+
+  // console.log(categories);
+
+
+  const [productCategories, setProductCategories] = useState([]);
+
+  const getProductCategoriesData = async () => {
     setLoading(true);
-    const {data} = await http.get("/categories");
-    setCategories(data.Categories);
-    setLoading(false)
-  }
+    const { data } = await http.get("/productCategory");
+    setProductCategories(data.productCategories);
+    setLoading(false);
+  };
 
-
-  useEffect(() =>{
-    getCategoriesData();
+  //Get the Product CategoriesData
+  useEffect(() => {
+    getProductCategoriesData()
   }, []);
-
-
-  console.log(categories);
   
 
 
@@ -58,13 +73,13 @@ function CategorySidebar() {
     <div className="shadow-md rounded-md p-4">
       <h2 className="text-lg font-semibold mb-4">Categories</h2>
       <ul className="space-y-2">
-        {categories.map((category) => (
+        {productCategories.map((category) => (
           <Link to={`/categories/${category.slug}`} key={category.name} className="hover:text-orange-500 hover:bg-gray-50 flex justify-between items-center">
             <p
               
               className="capitalize"
             >
-              {category.name}
+              {category.title}
             </p>
             <span className="text-sm text-gray-500">
               {categoryCounts[category.slug] || 0} {/* Display count or 0 if no products */}

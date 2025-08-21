@@ -110,7 +110,7 @@ const Create = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <SubmitBtn formik={formik} label="save Category for products" />
+          <SubmitBtn formik={formik} label="save Category for Product" />
           {/* <Button type="submit">Save Category for Product</Button> */}
         </CardFooter>
       </Card>

@@ -22,8 +22,8 @@ import { ClearStorage, FromStorage } from "@/library";
 
 export function capitalizeWords(str) {
   return str
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    ?.split(" ")
+    ?.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");
 }
 export function convertToSlug(phrase) {
@@ -46,7 +46,7 @@ export const Navbar = () => {
   const [name, setName] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [productCategories, setProductCategories] = useState([]);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -55,17 +55,20 @@ export const Navbar = () => {
     navigate("/");
   };
 
-  const getCategoriesData = async () => {
+  const getProductCategoriesData = async () => {
+
+    console.log("I am insdie the get producyt categories");
+    
     setLoading(true);
-    const { data } = await http.get("/categories");
-    setCategories(data.Categories);
+    const { data } = await http.get("/productCategory");
+    setProductCategories(data.productCategories);
     setLoading(false);
   };
 
-  //Get the CategoriesData
+  //Get the Product CategoriesData
   useEffect(() => {
-    getCategoriesData();
-  }, []);
+    getProductCategoriesData()
+  }, [productCategories]);
 
   const isActive = (path) => location.pathname === path;
 
@@ -82,7 +85,7 @@ export const Navbar = () => {
     navigate(`/categories/?search=${term}`);
   };
 
-  console.log(categories);
+
 
   return (
     <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 w-[80%] flex justify-between items-center p-4 shadow-md bg-white rounded-full px-8 mt-6 z-50">
@@ -120,7 +123,7 @@ export const Navbar = () => {
                 {/* Dropdown content */}
                 <div className="absolute mt-1 opacity-0 scale-y-0 group-hover:opacity-100 group-hover:scale-y-100 transition-all duration-300 origin-top bg-white shadow-md border rounded-md w-52">
                   <ul className="py-2">
-                    {categories?.map((category, index) => (
+                    {productCategories.map((category, index) => (
                       <Link
                         key={index}
                         to={`/categories/${category.slug}`}
@@ -131,7 +134,7 @@ export const Navbar = () => {
                         }
                       >
                         <li key={index} className="px-4 py-2 hover:bg-gray-200">
-                          {capitalizeWords(category.name)} <hr />
+                          {capitalizeWords(category.title)} <hr />
                         </li>
                       </Link>
                     ))}

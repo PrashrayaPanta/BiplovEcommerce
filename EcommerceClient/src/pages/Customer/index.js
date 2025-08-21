@@ -1,9 +1,14 @@
-import { Cart } from "./Cart";
+import * as Blog from "./Blog"
 
 
-import { Categories } from "./Categories";
+import * as Cart from "./Cart"
 
 
+import * as Shop from "./Shop"
 
 
-export {Cart, Categories};
+import * as Product from "./Product"
+
+export {Blog, Cart, Shop, Product}
+
+

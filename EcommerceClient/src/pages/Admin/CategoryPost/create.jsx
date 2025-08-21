@@ -104,7 +104,7 @@ const Create = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit">Save Category for Product</Button>
+          <Button type="submit">Save Category for Post</Button>
         </CardFooter>
       </Card>
     </form>

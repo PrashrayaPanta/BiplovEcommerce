@@ -7,6 +7,12 @@ const productCategoryRoute = express.Router();
 
 const isAdmin = require("../middleware/isAdmin.js");
 const productCategoryCtrl = require("../controller/productCatgeory.js");
+const { getAllProductsCategory } = require("../controller/Product.js");
+
+
+
+
+
 
 
 
@@ -36,6 +42,12 @@ productCategoryRoute.get(
     isAdmin,
     productCategoryCtrl.deleteProductCategory
   );
+
+  productCategoryRoute.get("/productCategory", productCategoryCtrl.getAllProductCategory)
+
+
+
+  productCategoryRoute.get("/productCategory/:slug", productCategoryCtrl.getAllProductCategoryBySlug)
 
 
 module.exports = productCategoryRoute;

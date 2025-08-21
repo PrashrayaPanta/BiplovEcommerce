@@ -6,6 +6,9 @@ import CartItem from '@/components/cartComponents/CartItem';
 
 
 export  function Cart() {
+
+    console.log("I am insdie the cart Page");
+    
   // const [cartItems, setCartItems] = useState(initialCartItems);
 
   // const updateQuantity = (id, newQuantity) => {

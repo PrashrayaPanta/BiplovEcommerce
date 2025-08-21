@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import CategorySidebar from "../../components/categoryComponents/CategorySidebar"; // Adjust the import path as needed
-import ProductSection from "../../components/categoryComponents/ProductSection"; // Adjust the import path as needed
+import CategorySidebar from "../../../components/categoryComponents/CategorySidebar"; // Adjust the import path as needed
+import ProductSection from "../../../components/categoryComponents/ProductSection"; // Adjust the import path as needed
+
+
+
 import http from "@/http";
 
 export function Categories() {
@@ -20,7 +23,7 @@ export function Categories() {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row p-6 mt-20">
+    <div className="flex flex-col md:flex-row p-6 mt-20 bg-blue">
       {/* Category Sidebar */}
       <CategorySidebar />
 

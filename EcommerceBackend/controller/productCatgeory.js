@@ -8,13 +8,16 @@ const productCategoryCtrl = {
   createProductCategory: asyncHandler(async (req, res) => {
 
         const {title} = req.body;
+        
+
+        const slug = title.trim().toLowerCase().replace(/\s+/g, "-");
 
 
         if(!title){
             throw new Error("Empty is not allowed")
         }
 
-        await ProductCategory.create({title})
+        await ProductCategory.create({title, slug})
 
 
         res.json({message:"Added CATEGORY succesfully"})
@@ -40,7 +43,18 @@ const productCategoryCtrl = {
 
     res.json({message:"delete succesfully"})
 
-  })
+  }),
+
+
+
+  getAllProductCategoryBySlug: asyncHandler(async(req, res) =>{
+
+    const productCategories = await ProductCategory.findOne({slug});
+
+
+    res.json({ productCategories})
+
+}),
 
 //   deleteCategory: asyncHandler(async (req, res) => {
 //     //get the id

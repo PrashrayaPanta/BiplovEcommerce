@@ -1,19 +1,34 @@
+import { imgUrl } from "@/library";
 import { Link } from "react-router-dom";
 
-
 export const ProductCard = ({ product }) => {
+  console.log(product);
+
   return (
-    <Link to={`/product/${product.slug}`} className="bg-white shadow-md rounded-lg w-full mx-auto text-center p-4" style={{cursor: "pointer"}}>
-      <img
-        src={product?.image}
-        alt={product?.name}
-        className="w-full aspect-square object-contain mb-3 rounded-t-lg"
-      />
-      <h2 className="text-lg font-semibold text-gray-800 truncate">{product.name}</h2>
+    <Link
+      to={`/product/${product.slug}`}
+      className="bg-white shadow-md rounded-lg w-full mx-auto text-center p-4"
+      style={{ cursor: "pointer" }}
+    >
+      <a
+        href={imgUrl(product?.images[0].public_id)}
+      >
+        <img
+          src={imgUrl(product?.images[0].public_id)}
+          alt={product?.name}
+          className="w-full aspect-square object-contain mb-3 rounded-t-lg"
+        />
+      </a>
+
+      <h2 className="text-lg font-semibold text-gray-800 truncate">
+        {product.name}
+      </h2>
       <p className="text-gray-500 text-sm">{product.category}</p>
       <div className="mt-2">
-        <span className="text-lg font-bold text-purple-600">₹ {product.price}</span>
-        <span className="text-gray-400 line-through ml-2">₹ {product.originalPrice}</span>
+        <span className="text-lg font-bold text-purple-600">
+          ₹ {product.price}
+        </span>
+        {/* <span className="text-gray-400 line-through ml-2">₹ {product.originalPrice}</span> */}
       </div>
       <div className="flex justify-center space-x-2 mt-2 text-lg">
         <span>🎧</span>
@@ -24,7 +39,12 @@ export const ProductCard = ({ product }) => {
       </div>
       <div className="flex items-center justify-center mt-3">
         <input type="checkbox" id={`compare-${product.id}`} className="mr-2" />
-        <label htmlFor={`compare-${product.id}`} className="text-gray-600 text-sm">Add to Compare</label>
+        <label
+          htmlFor={`compare-${product.id}`}
+          className="text-gray-600 text-sm"
+        >
+          Add to Compare
+        </label>
       </div>
     </Link>
   );

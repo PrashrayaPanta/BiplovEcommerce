@@ -22,6 +22,32 @@ export function BlogDetail() {
 
 
   console.log(post);
+
+  // console.log(content);
+
+
+  // console.log(post.content);
+
+  const htmlString = post.content;
+
+  // Parse the HTML string
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, "text/html");
+
+  // console.log("This is the document");
+
+  // console.log(doc);
+
+  const imgCha = doc.querySelector("img");
+
+  // console.log(imgCha);
+
+  // console.log(imgCha);
+
+
+  
+
+  const imgSrc = doc.querySelector("img")?.getAttribute("src");
   
 
   // Find the blog post with the matching slug
@@ -44,7 +70,7 @@ export function BlogDetail() {
   return (
     <div className="p-6 max-w-4xl mx-auto mt-16">
       <img
-        src=""
+        src={imgSrc}
         alt=""
         className="w-full h-auto object-cover rounded-lg mb-6"
       />

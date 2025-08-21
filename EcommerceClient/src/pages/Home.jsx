@@ -39,6 +39,7 @@ export function Home() {
       <PopularThisWeek/>
 
       <SmallNotice/>
+      
       <FollowOnInsta/>
 
     </div>

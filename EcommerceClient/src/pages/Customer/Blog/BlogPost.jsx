@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import BlogBox from "../components/blogComponents/BlogBox"; // Adjust path if needed
-import { blogData } from "../../public/jsons/blogs";
+import BlogBox from "../../../components/blogComponents/BlogBox"; // Adjust path if needed
+
 import WriteBlog from "@/components/blogComponents/WriteBlog";
 import http from "@/http";
 import { dtFormat } from "@/library";
 
-export function Blog() {
+export function BlogPost() {
   const [posts, setPosts] = useState([]);
 
   const getAllPost = async () => {

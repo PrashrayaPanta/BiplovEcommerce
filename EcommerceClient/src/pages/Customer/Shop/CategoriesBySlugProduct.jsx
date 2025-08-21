@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 
 
 
-const CategoriesBySlug = () => {
+const CategoriesBySlugProduct = () => {
   const { slug } = useParams();
 
   const [categoryProducts, setCategoryProducts] = useState([]);
@@ -45,4 +45,4 @@ const CategoriesBySlug = () => {
   );
 };
 
-export default CategoriesBySlug;
+export default CategoriesBySlugProduct;

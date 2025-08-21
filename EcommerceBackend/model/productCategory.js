@@ -5,7 +5,12 @@ const productCategorySchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique:true,
+      unique: true,
+    },
+
+    slug: {
+      type: String,
+      required: true,
     },
   },
   {
@@ -13,6 +18,9 @@ const productCategorySchema = new mongoose.Schema(
   }
 );
 
-const ProductCategory = mongoose.model("productCategory", productCategorySchema);
+const ProductCategory = mongoose.model(
+  "productCategory",
+  productCategorySchema
+);
 
 module.exports = ProductCategory;

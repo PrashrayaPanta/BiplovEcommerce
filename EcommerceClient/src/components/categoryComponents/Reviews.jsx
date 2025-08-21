@@ -17,6 +17,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useParams } from "react-router-dom";
 import http from "@/http";
+import { useSelector } from "react-redux";
 
 const fakeReviews = [
   {
@@ -61,6 +62,11 @@ function Reviews() {
 
   console.log(slug);
 
+  const {token} = useSelector((state) => state.user.value);
+
+
+
+
   const formik = useFormik({
     initialValues: {
       reviewerName: "",
@@ -81,10 +87,9 @@ function Reviews() {
         try {
           console.log("I am inside the posty login data");
 
-          const { token } = JSON.parse(localStorage.getItem("userInfo"));
 
-          console.log(token);
-
+    
+    
           const response = await http.post(`/products/${slug}/reviews`, data, {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -128,7 +133,10 @@ function Reviews() {
 
   const [reviews, setReviews] = useState([]);
 
-  const { token } = JSON.parse(localStorage.getItem("userInfo"));
+ 
+ 
+
+
 
   const getProductReviews = async () => {
     const { data } = await http.get(`/products/${slug}/reviews`, {
@@ -142,7 +150,7 @@ function Reviews() {
 
   useEffect(() => {
     getProductReviews();
-  });
+  }, [reviews]);
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Customer Reviews</h1>
