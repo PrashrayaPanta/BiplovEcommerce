@@ -37,22 +37,25 @@ import http from '../../http';
  
 
 
-//   // const categoryCounts = {};
+  // const categoryCounts = {};
 
-//   // // Loop through each product and increment the count for each of its categories
-//   // products.forEach(product => {
-//   //   product.categories.forEach(category => {
-//   //     if (!categoryCounts[category]) {
-//   //       categoryCounts[category] = 0;
-//   //     }
-//   //     categoryCounts[category]++;
-//   //   });
-//   // });
+  // // Loop through each product and increment the count for each of its categories
+  // products.forEach(product => {
+  //   product.categories.forEach(category => {
+  //     if (!categoryCounts[category]) {
+  //       categoryCounts[category] = 0;
+  //     }
+  //     categoryCounts[category]++;
+  //   });
+  // });
 
-//   // return categoryCounts;
+  // return categoryCounts;
 // }
 
-function CategorySidebar() {
+function CategorySidebar({categoryCount}) {
+
+  console.log(categoryCount);
+  
 
   // const categoryCounts = countProductsByCategory();
 
@@ -77,7 +80,7 @@ function CategorySidebar() {
   }, []);
 
 
-  console.log(productCategories);
+  // console.log(productCategories);
   
   
 
@@ -95,7 +98,9 @@ function CategorySidebar() {
               {category.title}
             </p>
             <span className="text-sm text-gray-500">
-              0
+
+              {categoryCount?.[category?.slug]}
+              {/* {categoryCount} */}
               {/* {categoryCounts[category.slug] || 0} Display count or 0 if no products */}
             </span>
           </Link>

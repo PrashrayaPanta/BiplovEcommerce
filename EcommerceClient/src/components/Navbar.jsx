@@ -56,9 +56,8 @@ export const Navbar = () => {
   };
 
   const getProductCategoriesData = async () => {
-
     console.log("I am insdie the get producyt categories");
-    
+
     setLoading(true);
     const { data } = await http.get("/productCategory");
     setProductCategories(data.productCategories);
@@ -67,8 +66,8 @@ export const Navbar = () => {
 
   //Get the Product CategoriesData
   useEffect(() => {
-    getProductCategoriesData()
-  }, [productCategories]);
+    getProductCategoriesData();
+  }, []);
 
   const isActive = (path) => location.pathname === path;
 
@@ -84,8 +83,6 @@ export const Navbar = () => {
     const term = convertToSlug(name);
     navigate(`/categories/?search=${term}`);
   };
-
-
 
   return (
     <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 w-[80%] flex justify-between items-center p-4 shadow-md bg-white rounded-full px-8 mt-6 z-50">
@@ -112,6 +109,16 @@ export const Navbar = () => {
                 style={{ cursor: "pointer" }}
               >
                 Shop
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/cart"
+                className="hover:text-gray-500"
+                style={{ cursor: "pointer" }}
+              >
+                Cart
               </Link>
             </li>
             {/* Product Categories Dropdown */}
@@ -168,7 +175,7 @@ export const Navbar = () => {
           <>
             <li>
               <Link
-                to="/klmnljnk "
+                to="/profile"
                 className="hover:text-gray-500"
                 style={{ cursor: "pointer" }}
               >

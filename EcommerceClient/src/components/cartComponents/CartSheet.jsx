@@ -1,32 +1,34 @@
-import React, { useState } from 'react';
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
-import { ShoppingCartIcon } from 'lucide-react';
+import React, { useState } from "react";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { ShoppingCartIcon } from "lucide-react";
 
-import CartItem from './CartItem';
-import { Link, useNavigate } from 'react-router-dom';
+import CartItem from "./CartItem";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CartSheet() {
   const [cartItems, setCartItems] = useState(initialCartItems);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   // Function to handle link click, close the sheet and navigate
   const handleLinkClick = (path) => {
     setIsOpen(false); // Close the sheet
-    navigate(path);   // Redirect to the path
+    navigate(path); // Redirect to the path
   };
   const updateQuantity = (id, newQuantity) => {
     setCartItems(
-      cartItems.map(item =>
+      cartItems.map((item) =>
         item.id === id ? { ...item, quantity: Math.max(1, newQuantity) } : item
       )
     );
   };
-  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
-
-  const removeItem = id => {
-    setCartItems(cartItems.filter(item => item.id !== id));
+  const removeItem = (id) => {
+    setCartItems(cartItems.filter((item) => item.id !== id));
   };
 
   return (
@@ -41,9 +43,11 @@ export default function CartSheet() {
       </SheetTrigger>
       <SheetContent className="w-96 p-4 bg-red-500 shadow-lg flex flex-col justify-between ">
         <div className="flex-1 overflow-y-auto bg-red-500">
-          <h2 className="text-lg font-bold text-gray-800 mb-4">Shopping Cart</h2>
+          <h2 className="text-lg font-bold text-gray-800 mb-4">
+            Shopping Cart
+          </h2>
           {cartItems.length > 0 ? (
-            cartItems.map(item => (
+            cartItems.map((item) => (
               <CartItem
                 key={item.id}
                 item={item}
@@ -58,29 +62,32 @@ export default function CartSheet() {
 
         {/* Subtotal Section and Buttons */}
         <div className="p-4 border-t flex flex-col">
-        <div className="flex justify-between items-center mb-2">
+          <div className="flex justify-between items-center mb-2">
             <span className="text-lg font-medium">Subtotal:</span>
             <span className="text-lg font-bold">
-            Rs {cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}
+              Rs{" "}
+              {cartItems.reduce(
+                (acc, item) => acc + item.price * item.quantity,
+                0
+              )}
             </span>
-        </div>
-        
-        {/* Link to View Cart */}
-        <button
-            onClick={()=>{
-                handleLinkClick("/cart")
+          </div>
+
+          {/* Link to View Cart */}
+          <button
+            onClick={() => {
+              handleLinkClick("/cart");
             }}
             className="text-sm text-red-500 hover:underline mx-auto w-full text-center mb-2"
-        >
+          >
             View Cart
-        </button>
+          </button>
 
-        {/* Checkout Button */}
-        <button className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-gray-600 transition w-full">
+          {/* Checkout Button */}
+          <button className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-gray-600 transition w-full">
             Checkout
-        </button>
+          </button>
         </div>
-
       </SheetContent>
     </Sheet>
   );

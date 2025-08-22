@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 import {
   Table,
   TableBody,
@@ -14,9 +16,14 @@ import { Info, Star, FileText } from "lucide-react";
 import Reviews from "../../../components/categoryComponents/Reviews";
 import ProductGallery from "../../../components/categoryComponents/ProductGallery";
 import http from "@/http";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "@/store";
 
 export const ProductDescription = () => {
+  const cart = useSelector((state) => state.cart.value);
+
+  const dispatch = useDispatch();
+
   console.log("I am inside ProductDescription component");
 
   const user = useSelector((state) => state.user.value);
@@ -38,6 +45,39 @@ export const ProductDescription = () => {
     // fetchProduct();
     fetchgetProductBySlug();
   }, [slug]);
+
+  const handleAddToCart = () => {
+    console.log("I am inside handle add to cart  ");
+
+    let temp = { ...cart };
+
+    let qty = 1;
+
+    let price = product.price;
+
+    if (product._id in temp) {
+      qty = qty + temp[product?._id].qty;
+    }
+
+    let total = qty * price;
+
+    temp = {
+      ...temp,
+
+      [product?._id]: {
+        product,
+        price,
+        total,
+        qty: qty,
+      },
+    };
+
+    console.log(temp);
+
+    dispatch(setCart(temp));
+
+    toast.success("Succesfully added to cart");
+  };
 
   console.log(product);
 
@@ -71,7 +111,10 @@ export const ProductDescription = () => {
             <div className="flex -mx-2 mb-4">
               {/* add To Cart */}
               <div className="w-1/2 px-2">
-                <button className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">
+                <button
+                  className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700"
+                  onClick={handleAddToCart}
+                >
                   Add to Cart
                 </button>
               </div>
@@ -85,20 +128,18 @@ export const ProductDescription = () => {
             </div>
           </div>
           <div className="md:flex-1 px-4">
-
             {/* Product Title */}
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
               Product Name:{product?.title}
             </h2>
             <div className="flex mb-4">
-
-                {/* Price Part */}
+              {/* Price Part */}
               <div className="mr-4">
                 <span className="font-bold text-gray-700 dark:text-gray-300">
                   Price: {product.price}
                 </span>
                 <span className="text-gray-600 dark:text-gray-300">
-                 OrginalPrice:{product?.originalPrice}
+                  OrginalPrice:{product?.originalPrice}
                 </span>
               </div>
               <div>
@@ -111,14 +152,12 @@ export const ProductDescription = () => {
               </div>
             </div>
             <div>
-
-                {/* Product belonging to which  Category Name */}
+              {/* Product belonging to which  Category Name */}
               <span className="font-bold text-gray-700 dark:text-gray-300">
-               Category Name: {product.categoryName}
+                Category Name: {product.categoryName}
               </span>
 
-
-              {/* Product Description coming from TinyMCE Editor*/}  
+              {/* Product Description coming from TinyMCE Editor*/}
               <div
                 className="text-gray-600 dark:text-gray-300 text-sm mt-2"
                 dangerouslySetInnerHTML={{ __html: product?.description }}
@@ -127,9 +166,10 @@ export const ProductDescription = () => {
           </div>
         </div>
 
+        {/* Tab Related */}
         <div className="mt-8">
           <nav className="flex justify-center border-b border-gray-200 dark:border-gray-700">
-            <div className="flex space-x-8">
+            <div className="flex space-x-8 bg-blue-500">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
                 return (
@@ -163,7 +203,7 @@ export const ProductDescription = () => {
             </div>
           </nav>
 
-          <div className="mt-8">
+          <div className="mt-8 bg-red-500">
             {activeTab === "details" && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

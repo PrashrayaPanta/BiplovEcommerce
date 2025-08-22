@@ -17,9 +17,7 @@ export function BlogPost() {
     getAllPost();
   }, []);
 
-
   console.log(posts);
-  
 
   return (
     <div className="container mx-auto py-8 mt-20">

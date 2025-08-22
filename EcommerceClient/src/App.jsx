@@ -13,7 +13,6 @@ import * as Pages from "./pages";
 import { Navbar } from "./components/Navbar";
 import { BlueCircleCursor } from "./components/homeComponents/BlueCircleCursor";
 
-
 import { AdminRoute } from "./Routes/AdminRoute";
 import PrivateRoute from "./Routes/PrivateRoute";
 
@@ -27,16 +26,38 @@ function App() {
         <Routes>
           <Route path="/" element={<Pages.Home />} />
           {/* <Route path="/home2" element={<Home2 />} /> */}
-          <Route path="/categories" element={<Pages.Customer.Shop.Categories />} />
-          <Route path="/categories/:slug" element={<Pages.Customer.Shop.CategoriesBySlugProduct />} />
-          <Route path="/product/:slug" element={<Pages.Customer.Product.ProductDescription />} />
+          <Route
+            path="/categories"
+            element={<Pages.Customer.Shop.Categories />}
+          />
+
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute element={<Pages.Customer.Profile.Profile />} />
+            }
+          />
+          <Route
+            path="/categories/:slug"
+            element={<Pages.Customer.Shop.CategoriesBySlugProduct />}
+          />
+          <Route
+            path="/product/:slug"
+            element={<Pages.Customer.Product.ProductDescription />}
+          />
           <Route path="/blogs" element={<Pages.Customer.Blog.BlogPost />} />
-          <Route path="/blogs/:slug" element={<Pages.Customer.Blog.BlogDetail />} />
+          <Route
+            path="/blogs/:slug"
+            element={<Pages.Customer.Blog.BlogDetail />}
+          />
           <Route path="/contact" element={<Pages.Contact />} />
           <Route path="/wishlist" element={<Pages.Wishlist />} />
           <Route path="/login" element={<Pages.Auth.Login />} />
           <Route path="/register" element={<Pages.Auth.Register />} />
-          <Route path="/cart" element={<Pages.Customer.Cart.Cart />} />
+          <Route
+            path="/cart"
+            element={<PrivateRoute element={<Pages.Customer.Cart.Cart />} />}
+          />
           <Route path="/about-us" element={<Pages.AboutUs />} />
           {/* <Route path="/writeBlog" element={<Pages.Admin.BlogWritingPage />} /> */}
 

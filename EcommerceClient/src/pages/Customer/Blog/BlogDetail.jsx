@@ -26,37 +26,22 @@ export function BlogDetail() {
   const htmlString = post.content;
 
   console.log(htmlString);
-  
 
   console.log(typeof htmlString);
 
   // Parse the HTML string
   const parser = new DOMParser();
 
-
   //Return Dom Object
   const doc = parser.parseFromString(htmlString, "text/html");
 
-
-
   console.log(typeof doc);
-  
-
 
   const pTag = doc.querySelector("p");
 
-
   const pTagInner = pTag?.innerHTML;
 
-
-
-
-
   // console.log();
-  
-
-
-
 
   const imgSrc = doc.querySelector("img")?.getAttribute("src");
 
@@ -92,7 +77,8 @@ export function BlogDetail() {
 
       <div
         className="text-gray-700 text-lg"
-        dangerouslySetInnerHTML={{ __html: post.content }}>
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      >
         {/* {pTagInner?.split("img")[0]} */}
       </div>
     </div>

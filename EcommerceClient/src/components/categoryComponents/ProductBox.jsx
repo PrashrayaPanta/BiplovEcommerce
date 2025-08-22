@@ -4,10 +4,8 @@ import { useNavigate } from "react-router-dom";
 // import { useInView } from "react-intersection-observer";
 
 export default function ProductBox({ product }) {
-
   console.log("I am inside ProductBox component");
   console.log(product);
-
 
   const navigate = useNavigate();
   // Intersection Observer
@@ -39,25 +37,21 @@ export default function ProductBox({ product }) {
               </span>
             )}
 
-        
+            {/* console.log(Image[0].public_id) */}
 
-
-                {/* console.log(Image[0].public_id) */}
-
-                 {/* console.log(Image[0].url), */}
-               <img
-               alt="kjsndflk"
+            {/* console.log(Image[0].url), */}
+            <img
+              alt="kjsndflk"
               src={imgUrl(product?.images?.[0]?.public_id)}
               loading="lazy"
-               className="h-full w-full object-cover"
-              />
-    
+              className="h-full w-full object-cover"
+            />
           </div>
           <div className="p-4 flex flex-col justify-between min-h-36 bg-blue-500">
             <h3 className="text-sm font-semibold text-gray-800">
               <a href={product.href}>
-              <span aria-hidden="true" className="absolute inset-0" />
-              {product.name}
+                <span aria-hidden="true" className="absolute inset-0" />
+                {product.name}
               </a>
             </h3>
             <p className="mt-1 text-sm text-gray-500">{product.color}</p>
@@ -65,7 +59,9 @@ export default function ProductBox({ product }) {
             <div>
               <p className="text-md bg-blue-400 items-center flex gap-2 justify-center flex-wrap">
                 {product.originalPrice > product.price ? (
-                  <span className="line-through">Rs. {product.originalPrice}</span>
+                  <span className="line-through">
+                    Rs. {product.originalPrice}
+                  </span>
                 ) : (
                   ""
                 )}

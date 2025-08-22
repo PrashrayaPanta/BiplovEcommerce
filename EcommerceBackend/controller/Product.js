@@ -34,7 +34,7 @@ const productCtrl = {
       value,
     } = req.body;
 
-    if (!title || !description || !categoryId || !originalPrice) {
+    if (!title || !description || !categoryId || !price) {
       return res
         .status(400)
         .json({ message: "Some fields are missing in the request body" });
@@ -45,7 +45,6 @@ const productCtrl = {
     const productCategory = await ProductCategory.findById(categoryId);
 
     console.log(productCategory);
-    
 
     // console.log(category);
 
@@ -74,7 +73,7 @@ const productCtrl = {
       categoryId,
       productDetails: { key, value },
       categoryName: productCategory?.title,
-      productCategorySlug: productCategory?.slug
+      productCategorySlug: productCategory?.slug,
     });
 
     console.log(product);
@@ -193,9 +192,7 @@ const productCtrl = {
 
     const { slug } = req.params;
 
-
     console.log(slug);
-    
 
     const products = await Product.find({ productCategorySlug: slug });
 
