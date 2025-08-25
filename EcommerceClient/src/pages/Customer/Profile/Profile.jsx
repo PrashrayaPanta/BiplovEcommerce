@@ -26,7 +26,7 @@ const tabs = [
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("Orders");
   return (
-    <div>
+    <>
       <div className="mt-32">
         <nav className="flex justify-center border-b border-gray-200 dark:border-gray-700">
           <div className="flex space-x-8">
@@ -102,7 +102,7 @@ const Profile = () => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

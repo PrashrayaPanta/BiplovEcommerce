@@ -62,10 +62,7 @@ function Reviews() {
 
   console.log(slug);
 
-  const {token} = useSelector((state) => state.user.value);
-
-
-
+  const { token } = useSelector((state) => state.user.value);
 
   const formik = useFormik({
     initialValues: {
@@ -87,9 +84,6 @@ function Reviews() {
         try {
           console.log("I am inside the posty login data");
 
-
-    
-    
           const response = await http.post(`/products/${slug}/reviews`, data, {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -132,11 +126,6 @@ function Reviews() {
   });
 
   const [reviews, setReviews] = useState([]);
-
- 
- 
-
-
 
   const getProductReviews = async () => {
     const { data } = await http.get(`/products/${slug}/reviews`, {

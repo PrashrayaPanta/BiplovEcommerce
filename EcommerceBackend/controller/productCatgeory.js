@@ -6,155 +6,136 @@ const ProductCategory = require("../model/productCategory.js");
 
 const productCategoryCtrl = {
   createProductCategory: asyncHandler(async (req, res) => {
+    const { title } = req.body;
 
-        const {title} = req.body;
-        
+    const slug = title.trim().toLowerCase().replace(/\s+/g, "-");
 
-        const slug = title.trim().toLowerCase().replace(/\s+/g, "-");
+    if (!title) {
+      throw new Error("Empty is not allowed");
+    }
 
+    await ProductCategory.create({ title, slug });
 
-        if(!title){
-            throw new Error("Empty is not allowed")
-        }
-
-        await ProductCategory.create({title, slug})
-
-
-        res.json({message:"Added CATEGORY succesfully"})
+    res.json({ message: "Added CATEGORY succesfully" });
   }),
 
-  getAllProductCategory: asyncHandler(async(req, res) =>{
+  getAllProductCategory: asyncHandler(async (req, res) => {
+    const productCategories = await ProductCategory.find();
 
-        const productCategories = await ProductCategory.find();
-
-
-        res.json({ productCategories})
-
+    res.json({ productCategories });
   }),
 
-
-  deleteProductCategory :asyncHandler(async(req, res) =>{
-
-    const {id} = req.params;
-
+  deleteProductCategory: asyncHandler(async (req, res) => {
+    const { id } = req.params;
 
     await ProductCategory.findByIdAndDelete(id);
 
-
-    res.json({message:"delete succesfully"})
-
+    res.json({ message: "delete succesfully" });
   }),
 
+  getAllProductCategoryBySlug: asyncHandler(async (req, res) => {
+    const { slug } = req.params;
 
+    const productCategories = await ProductCategory.findOne({ slug });
 
-  getAllProductCategoryBySlug: asyncHandler(async(req, res) =>{
+    res.json({ productCategories });
+  }),
 
+  //   deleteCategory: asyncHandler(async (req, res) => {
+  //     //get the id
+  //     const { id } = req.params;
 
-    const {slug} = req.params;
+  //     //get Category collection deleted document in object form
+  //     const deletedCategory = await Category.findByIdAndDelete(id);
 
-    const productCategories = await ProductCategory.findOne({slug});
+  //     res.json({ message: "Deleted Certain Catgeory", deletedCategory });
 
+  //     console.log(deletedCategory);
+  //   }),
 
-    res.json({ productCategories})
+  //   getAllCategory: asyncHandler(async (req, res) => {
 
-}),
+  //     console.log("I am inside get all category");
+  //     const Categories = await Category.find();
 
-//   deleteCategory: asyncHandler(async (req, res) => {
-//     //get the id
-//     const { id } = req.params;
+  //     res.json({  Categories }).status(203);
+  //   }),
 
-//     //get Category collection deleted document in object form
-//     const deletedCategory = await Category.findByIdAndDelete(id);
+  //   getCertainCategory: asyncHandler(async (req, res) => {
+  //     console.log("I am inside certain category controller");
 
-//     res.json({ message: "Deleted Certain Catgeory", deletedCategory });
+  //     const { slug } = req.params;
 
-//     console.log(deletedCategory);
-//   }),
+  //     // Validate the `id`
+  //     // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //     //   return res.status(400).json({ message: "Invalid category ID" });
+  //     // }
 
-//   getAllCategory: asyncHandler(async (req, res) => {
+  //     const category = await Category.find({slug});
 
-//     console.log("I am inside get all category");
-//     const Categories = await Category.find();
+  //     if (!category) {
+  //       return res.status(404).json({ message: "Category not found" });
+  //     }
 
-//     res.json({  Categories }).status(203);
-//   }),
+  //     console.log(category);
 
-//   getCertainCategory: asyncHandler(async (req, res) => {
-//     console.log("I am inside certain category controller");
+  //     res
+  //       .status(201)
+  //       .json({ message: "Certain Category Fetched Successfully", category });
+  //   }),
 
-//     const { slug } = req.params;
+  //   EditCertainCategory: asyncHandler(async (req, res) => {
+  //     const { id } = req.params;
+  //     const { name } = req.body;
 
-//     // Validate the `id`
-//     // if (!mongoose.Types.ObjectId.isValid(id)) {
-//     //   return res.status(400).json({ message: "Invalid category ID" });
-//     // }
+  //     const slug = name.toLowerCase();
 
-//     const category = await Category.find({slug});
+  //     const categoryDocument = await Category.findById(id);
 
-//     if (!category) {
-//       return res.status(404).json({ message: "Category not found" });
-//     }
+  //     if (!categoryDocument) {
+  //       return res.status(404).json({ message: "Category not found" });
+  //     }
 
-//     console.log(category);
+  //     if (categoryDocument.name === name) {
+  //       return res.json({
+  //         message: "Category name is unchanged, please modify it",
+  //       });
+  //     }
 
-//     res
-//       .status(201)
-//       .json({ message: "Certain Category Fetched Successfully", category });
-//   }),
+  //     const afterUpdation = await Category.findByIdAndUpdate(
+  //       id,
+  //       { name, slug },
+  //       { new: true }
+  //     );
 
-//   EditCertainCategory: asyncHandler(async (req, res) => {
-//     const { id } = req.params;
-//     const { name } = req.body;
+  //     res.status(202).json({
+  //       message: "Updated successfully",
+  //       categoryDocumentAfterUpdation: afterUpdation,
+  //     });
+  //   }),
 
-    
-//     const slug = name.toLowerCase();
+  //   getCertainCategoryProducts: asyncHandler(async (req, res) => {
+  //     const { id } = req.params;
 
-//     const categoryDocument = await Category.findById(id);
+  //     // Validate the `id`
+  //     if (!mongoose.Types.ObjectId.isValid(id)) {
+  //       return res.status(400).json({ message: "Invalid category ID" });
+  //     }
 
-//     if (!categoryDocument) {
-//       return res.status(404).json({ message: "Category not found" });
-//     }
+  //     const category = await Category.findById(id).populate({
+  //       path: "posts",
+  //     });
 
-//     if (categoryDocument.name === name) {
-//       return res.json({
-//         message: "Category name is unchanged, please modify it",
-//       });
-//     }
+  //     if (!category) {
+  //       return res.status(404).json({ message: "Category not found" });
+  //     }
 
-//     const afterUpdation = await Category.findByIdAndUpdate(
-//       id,
-//       { name, slug },
-//       { new: true }
-//     );
+  //     console.log(category);
 
-//     res.status(202).json({
-//       message: "Updated successfully",
-//       categoryDocumentAfterUpdation: afterUpdation,
-//     });
-//   }),
-
-//   getCertainCategoryProducts: asyncHandler(async (req, res) => {
-//     const { id } = req.params;
-
-//     // Validate the `id`
-//     if (!mongoose.Types.ObjectId.isValid(id)) {
-//       return res.status(400).json({ message: "Invalid category ID" });
-//     }
-
-//     const category = await Category.findById(id).populate({
-//       path: "posts",
-//     });
-
-//     if (!category) {
-//       return res.status(404).json({ message: "Category not found" });
-//     }
-
-//     console.log(category);
-
-//     res
-//       .status(201)
-//       .json({ message: "Certain Category Fetched Successfully", category });
-//   }),
+  //     res
+  //       .status(201)
+  //       .json({ message: "Certain Category Fetched Successfully", category });
+  //   }),
 };
 
 module.exports = productCategoryCtrl;

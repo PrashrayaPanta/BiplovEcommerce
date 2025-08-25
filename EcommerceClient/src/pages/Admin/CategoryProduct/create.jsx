@@ -26,6 +26,7 @@ import * as Yup from "yup";
 import http from "@/http";
 import { useNavigate } from "react-router-dom";
 import { SubmitBtn } from "@/components/SubmitBtn";
+import { FromStorage } from "@/library";
 
 const Create = () => {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const Create = () => {
       console.log(data);
 
       async function PostProductData() {
-        const { token } = JSON.parse(localStorage.getItem("userInfo"));
+        const { token } = JSON.parse(FromStorage("userInfo"));
 
         try {
           const response = await http.post("/admin/productCategory", data, {
@@ -65,7 +66,6 @@ const Create = () => {
           setSubmitting(false);
         }
 
-       
         // console.log(response);
       }
 

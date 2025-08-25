@@ -1,40 +1,56 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { FromStorage } from "@/library";
+import http from "@/http";
 
 export const tinyMceApiKey = import.meta.env.VITE_TINYMCE_API_KEY || "";
 
-const uploadImageToServer = async (blobInfo) => {
+const uploadImageToCloudinaryServer = async (blobInfo) => {
+  console.log("I am insdie the upload image to server");
+
   const formData = new FormData();
+
+  console.log("I am after the formData initkiuxzation");
+
   formData.append("image", blobInfo.blob(), blobInfo.filename());
 
-  const token = JSON.parse(localStorage.getItem("userInfo"))?.token;
+  console.log(formData);
 
-  const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/admin/post/upload`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    }
-  );
+  console.log("I am after the form data you know");
 
-  if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(
-      `Upload failed (${response.status}): ${errorBody || "Unknown error"}`
-    );
-  }
+  const { token } = JSON.parse(FromStorage("userInfo"));
 
-  const data = await response.json();
+  console.log(token);
+
+  console.log("I am after the token");
+
+  const { data } = await http.post("/admin/post/upload", formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data", // needed for file uploads
+    },
+  });
+
+  //   `${import.meta.env.VITE_API_URL}/admin/post/upload`,
+  //   {
+  //     method: "POST",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     body: formData,
+  //   }
+  // );
+  console.log("I am after the response");
+
   if (!data?.url) {
     throw new Error("Upload succeeded but server returned no URL");
   }
-  return data.url;
+  return { url: data.url, public_id: data.public_id };
 };
 
-const TinyMCEEditor = ({ content, onEditorChange }) => {
+const TinyMCEEditor = ({ content, onEditorChange, setFieldvalue }) => {
+  console.log(setFieldvalue);
+
   return (
     <Editor
       apiKey={tinyMceApiKey}
@@ -63,10 +79,28 @@ const TinyMCEEditor = ({ content, onEditorChange }) => {
         `,
         images_upload_handler: async (blobInfo, success, failure) => {
           try {
+            // blobInfo is just a object having id filename as proepties
             console.log(blobInfo);
+            // console.log(blobInfo);
 
-            const url = await uploadImageToServer(blobInfo);
+            const { url, public_id } = await uploadImageToCloudinaryServer(
+              blobInfo
+            );
+
+            console.log(url);
+
+            console.log(public_id);
+
+            // When save button ic clicked the url associated is shown in Content Section
+
+            //If success the ui rendered the url
             success(url);
+
+            //Also set Formik's image field
+            setFieldvalue("image", {
+              url,
+              public_id,
+            });
           } catch (err) {
             failure(err?.message || "Image upload failed");
           }

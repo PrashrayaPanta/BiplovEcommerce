@@ -79,21 +79,13 @@ export function Login() {
           //   ToStorage("customerToken", response.data.token, remember);
           // }
 
+          console.log(response.data);
+
           dispatch(setUser(response.data));
 
+          ToStorage("userInfo", JSON.stringify(response.data), remember);
+
           navigate("/");
-
-          localStorage.setItem("userInfo", JSON.stringify(response.data));
-
-          // ToStorage("adminToken", response.data.token, remember);
-
-          // console.log("I am after the ToSring");
-
-          // response.data.token);
-
-          // if(response){
-          //   navigate("/login")
-          // }
         } catch ({ response }) {
           formik.setFieldError("email", response?.data?.message);
         } finally {

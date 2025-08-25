@@ -7,7 +7,7 @@ const postSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique:true
+      unique: true,
     },
 
     postCategory: {
@@ -23,13 +23,20 @@ const postSchema = new mongoose.Schema(
       required: true,
     },
 
-    slug:{
+    slug: {
       type: String,
-      unique:true
-    }
+      unique: true,
+    },
 
+    image: {
+      url: {
+        type: String,
+      },
 
-
+      public_id: {
+        type: String,
+      },
+    },
   },
 
   {

@@ -5,6 +5,8 @@ const Post = require("../model/Post");
 
 const postCtrl = {
   createPost: asyncHandler(async (req, res) => {
+    console.log("I am inside the craete post controller");
+
     console.log(req.body);
 
     const { title } = req.body;
@@ -15,7 +17,9 @@ const postCtrl = {
 
     const tags = [req.body.tags];
 
-    const slug = title.trim().toLowerCase().replace(/\s+/g, "-");
+    const slug = title?.trim()?.toLowerCase()?.replace(/\s+/g, "-");
+
+    console.log(content);
 
     // console.log(tags);
 
@@ -25,6 +29,7 @@ const postCtrl = {
       tags,
       content,
       slug,
+      image: req.body.image,
     });
 
     res.status(201).json({ message: "Post Craeted succesfully" });

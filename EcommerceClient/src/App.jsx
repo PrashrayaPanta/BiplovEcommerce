@@ -24,23 +24,30 @@ function App() {
         <Navbar />
         {/* <Suspense fallback={<div>Loading...</div>}> */}
         <Routes>
+          {/* Home Route */}
           <Route path="/" element={<Pages.Home />} />
           {/* <Route path="/home2" element={<Home2 />} /> */}
+
+          {/* Categories */}
           <Route
             path="/categories"
             element={<Pages.Customer.Shop.Categories />}
           />
 
+          {/* Profile */}
           <Route
             path="/profile"
             element={
               <PrivateRoute element={<Pages.Customer.Profile.Profile />} />
             }
           />
+
+          {/* categroeis DSlug */}
           <Route
             path="/categories/:slug"
             element={<Pages.Customer.Shop.CategoriesBySlugProduct />}
           />
+
           <Route
             path="/product/:slug"
             element={<Pages.Customer.Product.ProductDescription />}
@@ -63,7 +70,7 @@ function App() {
 
           <Route path="writeBlog">
             <Route
-              index
+              path="create"
               element={
                 <AdminRoute
                   element={
@@ -71,6 +78,15 @@ function App() {
                       element={<Pages.Admin.Post.BlogWritingPage />}
                     />
                   }
+                />
+              }
+            />
+
+            <Route
+              index
+              element={
+                <AdminRoute
+                  element={<PrivateRoute element={<Pages.Admin.Post.List />} />}
                 />
               }
             />

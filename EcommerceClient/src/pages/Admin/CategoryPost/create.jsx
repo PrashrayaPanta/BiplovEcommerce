@@ -25,6 +25,7 @@ import * as Yup from "yup";
 
 import http from "@/http";
 import { useNavigate } from "react-router-dom";
+import { FromStorage } from "@/library";
 const Create = () => {
   console.log("I am insiode post ko category");
 
@@ -51,7 +52,7 @@ const Create = () => {
       console.log(data);
 
       async function PostProductData() {
-        const { token } = JSON.parse(localStorage.getItem("userInfo"));
+        const { token } = JSON.parse(FromStorage("userInfo"));
 
         const response = await http.post("/admin/postCategories", data, {
           headers: {

@@ -63,14 +63,6 @@ export function BlogDetail() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto mt-20">
-      {/* <img
-        src={
-          imgSrc ||
-          "https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg"
-        }
-        alt=""
-        className="w-full h-auto object-cover rounded-lg mb-6"
-      /> */}
       <h1 className="text-3xl font-semibold mb-4">{post?.title}</h1>
       <h1>{post?.tags?.[0]}</h1>
       <p className="text-gray-500 text-sm mb-4">{post.postCategory?.title}</p>

@@ -1,5 +1,3 @@
-
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,14 +14,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-
-import http from "../../http"
+import http from "../../http";
 
 // Import Link for navigation
 import InputField from "@/components/InputField";
 import { SubmitBtn } from "@/components/SubmitBtn.jsx";
-
-
 
 // export const registerSchema = z.object({
 //   username: z.string().min(2, {
@@ -38,15 +33,12 @@ import { SubmitBtn } from "@/components/SubmitBtn.jsx";
 // });
 
 export function Register() {
-
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-
-      username:"",
+      username: "",
       email: "",
       password: "",
-
     },
 
     validationSchema: Yup.object({
@@ -66,11 +58,9 @@ export function Register() {
         try {
           const response = await http.post("/users/register", data);
 
-          console.log(response);        
-        
-          navigate("/login");
+          console.log(response);
 
-        
+          navigate("/login");
 
           // ToStorage("customerPartToken", response.data.token, remember);
 
@@ -119,9 +109,7 @@ export function Register() {
         <h1 className="text-2xl font-bold text-center">Register</h1>
 
         <div className="flex flex-col gap-6">
-
-
-        <div className="grid gap-2">
+          <div className="grid gap-2">
             <InputField
               formik={formik}
               label="Username"
@@ -151,7 +139,6 @@ export function Register() {
             />
           </div>
 
-      
           <SubmitBtn formik={formik} label="Register" />
         </div>
         {/* Login Prompt */}

@@ -16,12 +16,19 @@ import { useFormik } from "formik";
 
 import * as Yup from "yup";
 import http from "@/http";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "@/store";
+import { ToStorage } from "@/library";
 
 const EditProfile = () => {
+  const user = useSelector((state) => state.user.value);
+
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
-      username: "",
-      email: "",
+      username: user?.username,
+      email: user?.email,
     },
 
     validationSchema: Yup.object({
@@ -39,13 +46,33 @@ const EditProfile = () => {
           const { token } =
             JSON.parse(localStorage.getItem("userInfo")) || null;
 
-          const response = await http.put("/users/profile/edit", data, {
+          await http.put("/users/profile/edit", data, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
 
-          console.log(response);
+          //   console.log(response);
+
+          const response1 = await http.get("/users/profile", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          //   console.log(response1.data.user);
+
+          //   console.log(response1.data.user);
+
+          //   console.log(data);
+
+          //   console.log(data);
+
+          //   console.log({ data });
+
+          //   ToStorage("userInfo", JSON.stringify(response1.data.user));
+
+          dispatch(setUser(response1.data.user));
 
           // console.log(response);
 
@@ -139,7 +166,6 @@ const EditProfile = () => {
                   type="email"
                   placeholder="New Email"
                   name="email"
-                  required
                   onChange={formik.handleChange}
                   value={formik.values.email}
                   onBlur={formik.handleBlur}

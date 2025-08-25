@@ -52,13 +52,21 @@ postRoute.post(
   isAdmin,
   upload.single("image"),
   (req, res) => {
+    console.log("I am inside the login file uplaod ro cloudinary");
+
+    console.log(
+      "I am inside the login file upload to cloudinary not in databse"
+    );
+
+    console.log(req.file);
+
     if (!req.file) {
       return res.status(400).json({ message: "No image uploaded" });
     }
 
     // multer-storage-cloudinary exposes Cloudinary URL at file.path
     // and the public identifier at file.filename
-    return res.status(201).json({
+    res.status(201).json({
       message: "Image uploaded successfully",
       url: req.file.path,
       public_id: req.file.filename,
@@ -66,11 +74,21 @@ postRoute.post(
   }
 );
 
+// postRoute.get;
+
+// postRoute.post(
+//   "/admin/post",
+//   isAuthenticated,
+//   isAdmin,
+//   upload.single("image"),
+//   postCtrl.createPost
+// );
+
 postRoute.post(
   "/admin/post",
   isAuthenticated,
   isAdmin,
-  upload.array("images"),
+  upload.single("image"),
   postCtrl.createPost
 );
 
@@ -78,8 +96,7 @@ postRoute.get("/admin/post", isAuthenticated, isAdmin, postCtrl.getAllPost);
 
 postRoute.get("/post", postCtrl.getAllPost);
 
-
-postRoute.get("/post/:slug", postCtrl.getPostBySlug)
+postRoute.get("/post/:slug", postCtrl.getPostBySlug);
 
 // postRoute.get("/post/:id", postCtrl.getPostByID);
 

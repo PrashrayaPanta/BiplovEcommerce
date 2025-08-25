@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Edit = () => {
-  return (
-    <div>
-      I am edit of post ko category
-    </div>
-  )
-}
+  return <div>I am edit of post ko category</div>;
+};
 
-export default Edit
+export default Edit;

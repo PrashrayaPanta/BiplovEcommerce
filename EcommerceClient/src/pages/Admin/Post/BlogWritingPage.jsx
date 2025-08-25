@@ -22,6 +22,7 @@ import TinyMCEEditor from "@/components/blogComponents/TinyMCEEditor";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import http from "@/http";
+import { FromStorage } from "@/library";
 
 export const BlogWritingPage = () => {
   const [editorKey, setEditorKey] = useState(0);
@@ -31,6 +32,7 @@ export const BlogWritingPage = () => {
       category: "",
       tags: "",
       content: "",
+      image: { url: "", public_id: "" }, // ✅ added image object
     },
 
     validationSchema: Yup.object({
@@ -50,7 +52,7 @@ export const BlogWritingPage = () => {
       // // console.log("Hello");
       // console.log(data);
 
-      const { token } = JSON.parse(localStorage.getItem("userInfo"));
+      const { token } = JSON.parse(FromStorage("userInfo"));
       console.log("I am insidce post data call");
 
       try {
@@ -91,7 +93,7 @@ export const BlogWritingPage = () => {
   const [postCategories, setPostCategories] = useState([]);
 
   const getPostCategories = async () => {
-    const { token } = JSON.parse(localStorage.getItem("userInfo"));
+    const { token } = JSON.parse(FromStorage("userInfo"));
 
     const response = await http.get("/admin/postCategories", {
       headers: {
@@ -181,6 +183,7 @@ export const BlogWritingPage = () => {
               <TinyMCEEditor
                 key={editorKey}
                 content={formik.values.content}
+                setFieldvalue={formik.setFieldValue}
                 onEditorChange={(newContent) =>
                   formik.setFieldValue("content", newContent)
                 }
@@ -202,6 +205,8 @@ export const BlogWritingPage = () => {
         </CardFooter> */}
       </Card>
 
+      {/* Preview Section */}
+
       <Card className="mt-8">
         <CardHeader>
           <CardTitle>Preview</CardTitle>
@@ -209,10 +214,11 @@ export const BlogWritingPage = () => {
         <CardContent>
           <h1 className="text-2xl font-bold mb-2">{formik.values.title}</h1>
           <div className="text-sm text-gray-500 mb-4">
+            Category:{formik.values.category} | {formik.values.tags}
             {/* Category: {category} | Tags: {tags} */}
           </div>
           <ScrollArea className="h-[300px] w-full rounded-md border p-4">
-            {/* <div dangerouslySetInnerHTML={{ __html: content }} /> */}
+            <div dangerouslySetInnerHTML={{ __html: formik.values.content }} />
           </ScrollArea>
         </CardContent>
       </Card>

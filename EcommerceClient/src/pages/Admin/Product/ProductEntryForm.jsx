@@ -25,6 +25,7 @@ import { useFormik } from "formik";
 
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { FromStorage } from "@/library";
 
 export const ProductEntryForm = () => {
   // console.log("i am inside product entry form");
@@ -38,7 +39,7 @@ export const ProductEntryForm = () => {
 
   // Get categories of product
   const getProductCategories = async () => {
-    const { token } = JSON.parse(localStorage.getItem("userInfo"));
+    const { token } = JSON.parse(FromStorage("userInfo"));
 
     setLoading(true);
 
@@ -67,9 +68,7 @@ export const ProductEntryForm = () => {
   //   details: {},
   // });
 
-
   console.log(productCategories);
-  
 
   const formik = useFormik({
     initialValues: {
@@ -131,7 +130,7 @@ export const ProductEntryForm = () => {
       // console.log(data);
 
       async function PostProductData() {
-        const { token } = JSON.parse(localStorage.getItem("userInfo"));
+        const { token } = JSON.parse(FromStorage("userInfo")) || null;
         console.log("I am insidce post data call");
 
         try {

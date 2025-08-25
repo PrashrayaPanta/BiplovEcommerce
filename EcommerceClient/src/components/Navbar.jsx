@@ -151,7 +151,6 @@ export const Navbar = () => {
             </li>
           </>
         )}
-
         <li>
           <Link
             to="/blogs"
@@ -161,16 +160,20 @@ export const Navbar = () => {
             Blogs
           </Link>
         </li>
-        <li>
-          <Link
-            to="/contact"
-            className="hover:text-gray-500"
-            style={{ cursor: "pointer" }}
-          >
-            Contact
-          </Link>
-        </li>
-
+        {/* Admin ma yeslai nadekhauni aaru ma dekhauni */}
+        {user?.isAdmin ? (
+          ""
+        ) : (
+          <li>
+            <Link
+              to="/contact"
+              className="hover:text-gray-500"
+              style={{ cursor: "pointer" }}
+            >
+              Contact
+            </Link>
+          </li>
+        )}
         {user ? (
           <>
             <li>
@@ -216,7 +219,6 @@ export const Navbar = () => {
             </li>
           </>
         )}
-
         {user?.isAdmin && (
           <>
             <li>
@@ -260,7 +262,6 @@ export const Navbar = () => {
             </li>
           </>
         )}
-
         <SearchDialog />
       </ul>
       <Sheet open={isOpen} onOpenChange={setIsOpen} className="h-full">

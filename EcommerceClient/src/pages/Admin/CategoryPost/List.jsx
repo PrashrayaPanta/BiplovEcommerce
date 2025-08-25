@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
-import { dtFormat } from "../../../library";
+import { dtFormat, FromStorage } from "../../../library";
 import { Link } from "react-router-dom";
 
 const List = () => {
@@ -16,7 +16,7 @@ const List = () => {
 
   // Get categories of product
   const getPostCategories = async () => {
-    const { token } = JSON.parse(localStorage.getItem("userInfo"));
+    const { token } = JSON.parse(FromStorage("userInfo")) || null;
 
     setLoading(true);
 
@@ -37,7 +37,7 @@ const List = () => {
   const handleDelete = async (id) => {
     console.log(id);
 
-    const { token } = JSON.parse(localStorage.getItem("userInfo"));
+    const { token } = JSON.parse(FromStorage("userInfo"));
 
     await http.delete(`/admin/postCategories/${id}`, {
       headers: {
