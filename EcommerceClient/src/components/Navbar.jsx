@@ -84,6 +84,51 @@ export const Navbar = () => {
     navigate(`/categories/?search=${term}`);
   };
 
+  const getUserProfile = async () => {
+    const { token } = JSON.parse(FromStorage("userInfo")) || null;
+
+    const { data } = await http.get("/users/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log(data);
+
+    // console.log(data);
+
+    dispatch(setUser(data.user));
+
+    // console.log(user);
+
+    // .then(({ data }) => {
+    //   console.log(data.user);
+    //   dispatch(setUser(data.user));
+    //   // dispatch(setUser(data));
+  };
+
+  useEffect(() => {
+    try {
+      setLoading(true);
+      if (!user) {
+        const { token } = JSON.parse(FromStorage("userInfo")) || null;
+        console.log(token);
+        if (token) {
+          console.log("I am inside the token ");
+
+          getUserProfile();
+        } else {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+    } finally {
+      setLoading(true);
+    }
+  }, [user]);
+
   return (
     <nav className="fixed top-0 left-1/2 transform -translate-x-1/2 w-[80%] flex justify-between items-center p-4 shadow-md bg-white rounded-full px-8 mt-6 z-50">
       <Link className="text-2xl font-bold" to="/" style={{ cursor: "pointer" }}>

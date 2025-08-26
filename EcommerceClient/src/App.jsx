@@ -35,6 +35,13 @@ function App() {
           />
 
           {/* Profile */}
+          {/* <Route
+            path="/profile"
+            element={
+              <PrivateRoute element={<Pages.Customer.Profile.Profile />} />
+            }
+          /> */}
+
           <Route
             path="/profile"
             element={

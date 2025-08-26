@@ -18,14 +18,19 @@ import * as Yup from "yup";
 import http from "@/http";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/store";
-import { ToStorage } from "@/library";
+import { FromStorage, ToStorage } from "@/library";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
   const user = useSelector((state) => state.user.value);
 
+  console.log(user);
+
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
       username: user?.username,
       email: user?.email,
@@ -43,8 +48,7 @@ const EditProfile = () => {
         try {
           console.log("I am inside the posty login data");
 
-          const { token } =
-            JSON.parse(localStorage.getItem("userInfo")) || null;
+          const { token } = JSON.parse(FromStorage("userInfo")) || null;
 
           await http.put("/users/profile/edit", data, {
             headers: {
@@ -60,6 +64,8 @@ const EditProfile = () => {
             },
           });
 
+          // console.log(response1);
+
           //   console.log(response1.data.user);
 
           //   console.log(response1.data.user);
@@ -72,39 +78,11 @@ const EditProfile = () => {
 
           //   ToStorage("userInfo", JSON.stringify(response1.data.user));
 
+          // ToStorage("userInfo", JSON.stringify(response1.data.user));
+
           dispatch(setUser(response1.data.user));
 
-          // console.log(response);
-
-          // console.log("I am after the response");
-
-          // console.log(response);
-
-          // console.log(response)
-
-          // console.log(response.data.token);
-
-          // if (response.data.isAdmin) {
-          //   ToStorage("adminToken", response.data.token, remember);
-          // } else {
-          //   ToStorage("customerToken", response.data.token, remember);
-          // }
-
-          //   dispatch(setUser(response.data));
-
-          //   navigate("/");
-
-          //   localStorage.setItem("userInfo", JSON.stringify(response.data));
-
-          // ToStorage("adminToken", response.data.token, remember);
-
-          // console.log("I am after the ToSring");
-
-          // response.data.token);
-
-          // if(response){
-          //   navigate("/login")
-          // }
+          navigate("/");
         } catch ({ response }) {
           formik.setFieldError("email", response?.data?.message);
         } finally {
@@ -143,12 +121,11 @@ const EditProfile = () => {
             <div className="grid gap-4">
               {/* Reviewer Name Text */}
               <div className="grid gap-2">
-                <Label htmlFor="password">New Username</Label>
+                <Label htmlFor="username">New Username</Label>
                 <Input
-                  id="password"
+                  id="username"
                   placeholder="New username"
                   name="username"
-                  required
                   onChange={formik.handleChange}
                   value={formik.values.username}
                   onBlur={formik.handleBlur}
@@ -158,7 +135,7 @@ const EditProfile = () => {
                 )}
               </div>
 
-              {/* confirm Password */}
+              {/* Email */}
               <div className="grid gap-2">
                 <Label htmlFor="email">New Email</Label>
                 <Input
