@@ -15,8 +15,10 @@ import { SubmitBtn } from "@/components/SubmitBtn";
 import http from "@/http";
 import LoadingComponent from "@/components/LoadingComponent";
 import { FromStorage } from "@/library";
+import { useNavigate } from "react-router-dom";
 
 const List = () => {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -43,6 +45,30 @@ const List = () => {
   }, []);
 
   console.log(posts);
+
+  const handleHello = () => {
+    navigate("/writeBlog/create");
+  };
+
+  const handlePostDelete = async (slug) => {
+    console.log("I am inside handle post delete");
+
+    const { token } = JSON.parse(FromStorage("userInfo")) || null;
+
+    const response = await http.delete(`/admin/post/${slug}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const response1 = await http.get("/admin/post", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setPosts(response1.data.posts);
+  };
 
   return (
     <>
@@ -82,7 +108,13 @@ const List = () => {
           </div>
         </nav> */}
 
-        <div className="mt-24">
+        <div className="mt-32">
+          <div className="text-right">
+            <Button onClick={handleHello} className="bg-red-500">
+              Add
+            </Button>
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -114,7 +146,9 @@ const List = () => {
                       </TableCell>
 
                       <TableCell>
-                        <Button>Delete</Button>
+                        <Button onClick={() => handlePostDelete(post.slug)}>
+                          Delete
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
