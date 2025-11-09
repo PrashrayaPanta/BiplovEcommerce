@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import DOMPurify from "dompurify";
+
 import {
   Table,
   TableBody,
@@ -141,7 +143,9 @@ const List = () => {
                       <TableCell>{post?.tags[0]}</TableCell>
                       <TableCell>
                         <div
-                          dangerouslySetInnerHTML={{ __html: post.content }}
+                          dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(post.content),
+                          }}
                         />
                       </TableCell>
 
