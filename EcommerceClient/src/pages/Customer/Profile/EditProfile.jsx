@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/store";
 import { FromStorage, ToStorage } from "@/library";
 import { useNavigate } from "react-router-dom";
+import { SubmitBtn } from "@/components/SubmitBtn";
 
 const EditProfile = () => {
   const user = useSelector((state) => state.user.value);
@@ -48,21 +49,11 @@ const EditProfile = () => {
         try {
           console.log("I am inside the posty login data");
 
-          const { token } = JSON.parse(FromStorage("userInfo")) || null;
-
-          await http.put("/users/profile/edit", data, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          await http.put("/users/profile/edit", data);
 
           //   console.log(response);
 
-          const response1 = await http.get("/users/profile", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response1 = await http.get("/users/profile");
 
           // console.log(response1);
 
@@ -82,7 +73,7 @@ const EditProfile = () => {
 
           dispatch(setUser(response1.data.user));
 
-          navigate("/");
+          // navigate("/");
         } catch ({ response }) {
           formik.setFieldError("email", response?.data?.message);
         } finally {
@@ -153,7 +144,12 @@ const EditProfile = () => {
               </div>
 
               <div>
-                <Button type="submit">Change Password</Button>
+                {/* <Button type="submit">Change Password</Button> */}
+                <SubmitBtn
+                  formik={formik}
+                  label="Change Profile"
+                  icon="fas fa-edit"
+                />
               </div>
             </div>
           </form>

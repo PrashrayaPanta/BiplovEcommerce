@@ -52,14 +52,8 @@ const Create = () => {
       console.log(data);
 
       async function PostProductData() {
-        const { token } = JSON.parse(FromStorage("userInfo"));
-
         try {
-          const response = await http.post("/admin/productCategory", data, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await http.post("/admin/productCategory", data);
           navigate("/productCategory");
         } catch (error) {
         } finally {
@@ -95,6 +89,7 @@ const Create = () => {
           <CardTitle>Product Category Information</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          {/* Input With Label Field */}
           <div>
             <Label htmlFor="name">Category Name</Label>
             <Input

@@ -25,16 +25,10 @@ const List = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const { token } = JSON.parse(FromStorage("userInfo")) || null;
-
   const getPostData = async () => {
     setLoading(true);
     try {
-      const { data } = await http.get("/admin/post", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await http.get("/admin/post");
       setPosts(data.posts);
     } catch (error) {
     } finally {
@@ -55,19 +49,9 @@ const List = () => {
   const handlePostDelete = async (slug) => {
     console.log("I am inside handle post delete");
 
-    const { token } = JSON.parse(FromStorage("userInfo")) || null;
+    const response = await http.delete(`/admin/post/${slug}`);
 
-    const response = await http.delete(`/admin/post/${slug}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const response1 = await http.get("/admin/post", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response1 = await http.get("/admin/post");
 
     setPosts(response1.data.posts);
   };

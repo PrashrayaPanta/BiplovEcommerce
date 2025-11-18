@@ -130,13 +130,9 @@ export const ProductEntryForm = () => {
       // console.log(data);
 
       async function PostProductData() {
-        const { token } = JSON.parse(FromStorage("userInfo")) || null;
-        console.log("I am insidce post data call");
-
         try {
           const response = await http.post("/admin/products", fd, {
             headers: {
-              Authorization: `Bearer ${token}`,
               "Content-Type": "multipart/form-data",
             },
           });

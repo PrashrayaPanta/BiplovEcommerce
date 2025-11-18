@@ -16,17 +16,12 @@ const List = () => {
 
   // Get categories of product
   const getProductCategories = async () => {
-    const { token } = JSON.parse(FromStorage("userInfo"));
-
     setLoading(true);
 
-    const response = await http.get("/admin/productCategory", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await http.get("/admin/productCategory");
 
     setproductCategories(response.data.productCategories);
+
     setLoading(false);
   };
 
@@ -35,19 +30,9 @@ const List = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    const { token } = JSON.parse(FromStorage("userInfo"));
+    await http.delete(`/admin/productCategory/${id}`);
 
-    await http.delete(`/admin/productCategory/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const { data } = await http.get("/admin/productCategory", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await http.get("/admin/productCategory");
 
     setproductCategories(data.productCategories);
   };

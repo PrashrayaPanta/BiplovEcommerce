@@ -50,7 +50,7 @@ export const Navbar = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    ClearStorage("customerToken");
+    ClearStorage("userInfo");
     dispatch(clearUser());
     navigate("/");
   };
@@ -85,13 +85,9 @@ export const Navbar = () => {
   };
 
   const getUserProfile = async () => {
-    const { token } = JSON.parse(FromStorage("userInfo")) || null;
+    // const { token } = JSON.parse(FromStorage("userInfo"));
 
-    const { data } = await http.get("/users/profile", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await http.get("/users/profile");
 
     console.log(data);
 
@@ -111,11 +107,8 @@ export const Navbar = () => {
     try {
       setLoading(true);
       if (!user) {
-        const { token } = JSON.parse(FromStorage("userInfo")) || null;
-        console.log(token);
+        const { token } = FromStorage("userInfo");
         if (token) {
-          console.log("I am inside the token ");
-
           getUserProfile();
         } else {
           setLoading(false);
@@ -245,11 +238,11 @@ export const Navbar = () => {
           <>
             <li>
               <Link
-                to="/Login"
+                to="/login"
                 className="hover:text-gray-500"
                 style={{ cursor: "pointer" }}
               >
-                Login
+                login
               </Link>
             </li>
 

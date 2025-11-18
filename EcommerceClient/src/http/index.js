@@ -1,3 +1,4 @@
+import { FromStorage } from "@/library";
 import axios from "axios";
 // import { FromStorage } from "../library";
 import { toast } from "react-toastify";
@@ -11,29 +12,25 @@ const http = axios.create({
   },
 });
 
-
-
-// http.interceptors.request.use(
-//   (config) => {
-//     // console.log("Hello");
-//     const token = FromStorage("r130fronttoken");  
-//     if (token) {
-//       // console.log(token);
-//       config.headers["Authorization"] = `Bearer ${token}`;
-//     }
-//     return config;
-//   },
-//   (error) => {
-//     Promise.reject(error);
-//   }
-// );
-
+http.interceptors.request.use(
+  (config) => {
+    // console.log("Hello");
+    const token = FromStorage("userInfo")?.token;
+    if (token) {
+      // console.log(token);
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    Promise.reject(error);
+  }
+);
 
 http.interceptors.response.use(
   (response) => {
     // console.log(response);
     if ("message" in response.data) {
-
       console.log(response.data.message);
       toast.success(response.data.message);
     }
@@ -43,7 +40,7 @@ http.interceptors.response.use(
 
   (error) => {
     console.log(error);
-    
+
     if ("message" in error.response.data) {
       toast.error(error.response.data.message);
     }

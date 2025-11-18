@@ -25,6 +25,8 @@ import http from "@/http";
 import { FromStorage } from "@/library";
 
 export const BlogWritingPage = () => {
+  console.log("Ia minside the blog writing page");
+
   const [editorKey, setEditorKey] = useState(0);
   const formik = useFormik({
     initialValues: {
@@ -43,24 +45,8 @@ export const BlogWritingPage = () => {
     }),
 
     onSubmit: async (data, { setSubmitting, resetForm }) => {
-      console.log("Ia mk insiden the han dle suibmit jkbkjhbkj");
-
-      console.log(data);
-
-      // console.log(data);
-
-      // // console.log("Hello");
-      // console.log(data);
-
-      const { token } = JSON.parse(FromStorage("userInfo"));
-      console.log("I am insidce post data call");
-
       try {
-        const response = await http.post("/admin/post", data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await http.post("/admin/post", data);
 
         // resetForm();
 
@@ -93,13 +79,7 @@ export const BlogWritingPage = () => {
   const [postCategories, setPostCategories] = useState([]);
 
   const getPostCategories = async () => {
-    const { token } = JSON.parse(FromStorage("userInfo"));
-
-    const response = await http.get("/admin/postCategories", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await http.get("/admin/postCategories");
 
     setPostCategories(response.data.postCategories);
   };
@@ -218,7 +198,11 @@ export const BlogWritingPage = () => {
             {/* Category: {category} | Tags: {tags} */}
           </div>
           <ScrollArea className="h-[300px] w-full rounded-md border p-4">
-            <div dangerouslySetInnerHTML={{ __html: formik.values.content }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(formik.values.content),
+              }}
+            />
           </ScrollArea>
         </CardContent>
       </Card>

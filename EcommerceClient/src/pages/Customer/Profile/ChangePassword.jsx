@@ -15,6 +15,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import http from "@/http";
 import { useNavigate } from "react-router-dom";
+import { SubmitBtn } from "@/components/SubmitBtn";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
@@ -34,13 +35,7 @@ const ChangePassword = () => {
 
       async function PutChangePasswordData() {
         try {
-          const { token } =
-            JSON.parse(localStorage.getItem("userInfo")) || null;
-          const response = await http.put("/users/profile/password", data, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await http.put("/users/profile/password", data);
 
           navigate("/login");
         } catch ({ response }) {
@@ -118,7 +113,11 @@ const ChangePassword = () => {
               </div>
 
               <div>
-                <Button type="submit">Change Password</Button>
+                <SubmitBtn
+                  formik={formik}
+                  label="Change Password"
+                  icon="fas fa-edit"
+                />
               </div>
             </div>
           </form>

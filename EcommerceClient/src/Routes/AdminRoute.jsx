@@ -8,7 +8,7 @@ export const AdminRoute = ({ element }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user.isAdmin) {
+    if (!user?.isAdmin) {
       navigate("/");
     }
   }, [user]);

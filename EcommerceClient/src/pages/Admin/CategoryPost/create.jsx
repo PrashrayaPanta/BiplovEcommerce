@@ -6,10 +6,10 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+
 import {
   Select,
   SelectContent,
@@ -23,9 +23,10 @@ import { useFormik } from "formik";
 
 import * as Yup from "yup";
 
+import InputField from "@/components/InputField";
 import http from "@/http";
 import { useNavigate } from "react-router-dom";
-import { FromStorage } from "@/library";
+
 const Create = () => {
   console.log("I am insiode post ko category");
 
@@ -52,13 +53,7 @@ const Create = () => {
       console.log(data);
 
       async function PostProductData() {
-        const { token } = JSON.parse(FromStorage("userInfo"));
-
-        const response = await http.post("/admin/postCategories", data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await http.post("/admin/postCategories", data);
 
         navigate("/postCategory");
         // console.log(response);
@@ -91,17 +86,12 @@ const Create = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label htmlFor="name">Category Name</Label>
-            <Input
-              id="name"
+            <InputField
+              formik={formik}
+              label="Category Title"
               name="title"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.title}
+              type="text"
             />
-            {formik.touched.title && formik.errors.title && (
-              <div className="text-red-400">{formik.errors.title}</div>
-            )}
           </div>
         </CardContent>
         <CardFooter>
